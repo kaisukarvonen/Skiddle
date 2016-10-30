@@ -15,7 +15,7 @@ $(function() {
 		/*if doesnt work, replace with input box: xx minutes (so can be from 1-whatever);
 		default value is 2 minutes, up and down arrows 
 		*/
-		countdownTime = 20; //goes back to 20 on page (playpage) refresh?
+		countdownTime = 20; //this never changes
 		localStorage.setItem('countdownTime', parseInt(countdownTime));
 	}
 });
@@ -147,6 +147,7 @@ function startTimer(duration, display) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         display.textContent = minutes + ":" + seconds; 
+		localStorage.setItem('countdownTime', parseInt(diff));
 
         if (diff <= 0) {
             start = Date.now() + 1000;
