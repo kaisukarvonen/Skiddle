@@ -2,6 +2,7 @@
 $(function() {
 	
 	if($('body').is('.game-menu')) {
+		
 		$('#time-slider').noUiSlider({
 			start: 90,
 			connect: "lower",
@@ -10,12 +11,18 @@ $(function() {
 				max: 300
 			}
 		});
-	}
 		
-	/*$('#time-slider').on('change', function(){
-		$('#time-value').text($(this).noUiSlider('value')[1]);
-	});*/
+		/*if doesnt work, replace with input box: xx minutes (so can be from 1-whatever);
+		default value is 2 minutes, up and down arrows 
+		*/
+		countdownTime = 20; //goes back to 20 on page (playpage) refresh?
+		localStorage.setItem('countdownTime', parseInt(countdownTime));
+	}
 });
+
+
+
+
 
 
 var allWords = JSON.parse(localStorage.getItem('allWords')) || [];
@@ -23,6 +30,10 @@ var gamemodes = JSON.parse(localStorage.getItem('gamemodes')) || [];
 
 $(function() {
     $("#handle-settings").click(function() {
+		gamemodes = [];
+		roundDoneWords = [];
+		roundSkippedWords = [];
+		//allWords is emptied when app is closed? 
 		
 		if ($('#explain-words').is(':checked')) {
 			gamemodes.push("explain");
@@ -33,10 +44,14 @@ $(function() {
 		if  ($('#location-words').is(':checked')) {
 			gamemodes.push("locationwords");
 		}
+		
 		localStorage.setItem("gamemodes", JSON.stringify(gamemodes));
+		//reset countdownTime
 		window.location = "playpage.html";
 	});
 });
+
+
 
 
 function wordFromFile(fileName) {
@@ -72,9 +87,9 @@ function wordIsUsed(word) {
 var chosenWord;
 
 function setRandomWord() {
-	var gamemodes = JSON.parse(localStorage.getItem("gamemodesUpdated"));
 	var randomMode = gamemodes[Math.floor(Math.random() * gamemodes.length)];
 	console.log("random: "+randomMode);
+	console.log(gamemodes);
 	console.log(JSON.parse(localStorage.getItem('allWords')));
 	
 	if (randomMode == "explain" || randomMode == "locationwords") {
@@ -91,19 +106,22 @@ function setRandomWord() {
 }
 
 function appendWord(word) {
-	console.log("appendWord: "+word);
 	$('.word').text(word);
 }
 
-
-var allWords = JSON.parse(localStorage.getItem('allWords')) || [];
+var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
+var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
 
 function saveDoneWordtoList(word) {
-	// sana json-object listalle (ominaisuudet: word: name, status (explain, mimic, skipped)
+	roundDoneWords.push(word);
+	localStorage.setItem('roundDoneWords', JSON.stringify(roundDoneWords));
+	//alert("done this round:" +roundDoneWords);
 }
 
 function saveSkippedWordtoList(word) {
-	//sana json-object listalle
+	roundSkippedWords.push(word);
+	localStorage.setItem('roundSkippedWords', JSON.stringify(roundSkippedWords));
+	//alert("skipped this round:" +roundSkippedWords);
 }
 
 function saveWordToAllWordsList(word) {
@@ -112,28 +130,70 @@ function saveWordToAllWordsList(word) {
 }
 
 
-$(function() {
-	$("body.playpage").each(setRandomWord);
-});
+
+
+
+function startTimer(duration, display) {
+    var start = Date.now(), //milliseconds
+        diff,
+        minutes,
+        seconds;
+    function timer() {
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds; 
+
+        if (diff <= 0) {
+            start = Date.now() + 1000;
+        }
+    };
+    // we don't want to wait a full second before the timer starts
+    timer();
+    setInterval(timer, 1000);
+	
+	window.setTimeout(function() {
+	window.location = "index.html"}, duration*1000); //milliseconds to seconds
+}
+
+var countdownTime = parseInt(localStorage.getItem('countdownTime'));
+
+
 
 $(function() {
+	if($('body').is('.playpage')) {
+		setRandomWord();
+		startTimer(window.countdownTime, document.querySelector('#remaining-time'));
+		
+	}
+
+
 	$(".word-is-done").click(function() {
+		saveWordToAllWordsList(window.chosenWord);
 		saveDoneWordtoList(window.chosenWord);
 	});
-});
 
 
-$(function() {
 	$(".skip-word").click(function() {
-	// uusi sana arvotaan listalta, nykyinen lisätään skipped words -listalle
+		saveWordToAllWordsList(window.chosenWord);
+		saveSkippedWordtoList(window.chosenWord);
+	});
+	
+	
+	//for testing
+	$(".emptyWordsList").click(function() {
+		allWords = [];
 	});
 });
 		
-	
 
 $(function() {
     $(".take-picture").click(function() {
-		capturePhoto();
+		capturePhotoEdit();
 	});
 });
 

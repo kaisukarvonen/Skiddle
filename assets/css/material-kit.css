@@ -25,14 +25,15 @@ body.inverse .card .form-control {
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
-  font-size:15px;
+  font-size:16px;
   line-height: 1.2em;
 }
 
 p.header-title {
 	text-align:center;
 	display:inline-block;
-	margin-left:31%;
+	margin-left:26%;
+	font-size:20px;
 }
 
 
@@ -46,8 +47,8 @@ a.nav-icon-link, a.nav-icon-link:active {
 }
 
 a.white-link, a.white-link:active {
-  color: #ddd;
-  font-size:13px;
+  color: #fff;
+  font-size:15px;
 }
 
 .current-word {
@@ -64,7 +65,7 @@ a.white-link, a.white-link:active {
 }
 
 .nav-icons-left {
-	padding-top:10px;
+	padding-top:16px;
 }
 
 a.icon-header-right, a.icon-header-right:active {
@@ -87,13 +88,13 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 
 .word-is-done {
 	float:left;
-	margin-left:50px;
+	margin-left:25px;
 }
 
 
 .skip-word {
 	float:right;
-	margin-right:50px;
+	margin-right:25px;
 }
 
 	
@@ -146,7 +147,7 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
   position: relative;
   padding: 12px 30px;
   margin: 10px 1px;
-  font-size: 12px;
+  font-size: 19px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0;
@@ -713,9 +714,9 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .btn.btn-fab.btn-fab-mini, .btn-group-sm .btn.btn-fab,
 .navbar .navbar-nav > li > a.btn.btn-fab.btn-fab-mini, .btn-group-sm
 .navbar .navbar-nav > li > a.btn.btn-fab {
-  height: 40px;
+  height: 90px;
   min-width: 40px;
-  width: 40px;
+  width: 90px;
 }
 .btn.btn-fab.btn-fab-mini.material-icons, .btn-group-sm .btn.btn-fab.material-icons,
 .navbar .navbar-nav > li > a.btn.btn-fab.btn-fab-mini.material-icons, .btn-group-sm
@@ -726,17 +727,17 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .btn.btn-fab.btn-fab-mini .material-icons, .btn-group-sm .btn.btn-fab .material-icons,
 .navbar .navbar-nav > li > a.btn.btn-fab.btn-fab-mini .material-icons, .btn-group-sm
 .navbar .navbar-nav > li > a.btn.btn-fab .material-icons {
-  font-size: 17px;
+  font-size: 48px;
 }
 .btn.btn-fab i.material-icons,
 .navbar .navbar-nav > li > a.btn.btn-fab i.material-icons {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 38%;
   transform: translate(-12px, -12px);
   line-height: 24px;
   width: 24px;
-  font-size: 24px;
+  font-size: 48px;
 }
 .btn.btn-lg, .btn-group-lg .btn,
 .navbar .navbar-nav > li > a.btn.btn-lg, .btn-group-lg
@@ -871,6 +872,7 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
   cursor: pointer;
   padding-left: 0;
   color: rgba(0,0,0, 0.26);
+
 }
 .form-group.is-focused .checkbox label {
   color: rgba(0,0,0, 0.26);
@@ -951,6 +953,9 @@ fieldset[disabled] .form-group.is-focused .checkbox label {
 .checkbox input[type=checkbox]:checked + .checkbox-material .check {
   background: #5AA892;
 }
+
+
+
 .checkbox input[type=checkbox]:checked + .checkbox-material .check:before {
   color: #FFFFFF;
   box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
@@ -1043,7 +1048,9 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
 }
 .togglebutton label {
   cursor: pointer;
-  color: #555;
+  color: #333;
+  padding-top: 7px;
+    font-size:16px;
 }
 .form-group.is-focused .togglebutton label {
   color:#5AA892;
@@ -1241,15 +1248,22 @@ legend {
 
 output {
   padding-top: 8px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
 }
 
 .form-control {
   height: 36px;
   padding: 7px 0;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.42857;
+}
+
+.form-control-narrow {
+  height: 16px;
+  padding: 2px 0;
+  font-size: 17px;
+  line-height: 1.2;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -1292,7 +1306,7 @@ output {
 .input-sm .input-sm {
   height: 24px;
   padding: 3px 0;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.5;
   border-radius: 0;
 }
@@ -1308,7 +1322,7 @@ output {
 .form-group-sm .form-control {
   height: 24px;
   padding: 3px 0;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.5;
 }
 .form-group-sm select.form-control {
@@ -1323,7 +1337,7 @@ output {
   height: 24px;
   min-height: 31px;
   padding: 4px 0;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -1389,7 +1403,7 @@ output {
 @media (min-width: 768px) {
   .form-horizontal .form-group-sm .control-label {
     padding-top: 4px;
-    font-size: 11px;
+    font-size: 16px;
   }
 }
 
@@ -1556,19 +1570,19 @@ output {
   margin-bottom: 7px;
 }
 .form-control::-moz-placeholder {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
 }
 .form-control:-ms-input-placeholder {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
 }
 .form-control::-webkit-input-placeholder {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
@@ -1577,14 +1591,14 @@ output {
 .checkbox label,
 .radio label,
 label {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
 }
 
 label.control-label {
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.07143;
   color: #AAAAAA;
   font-weight: 400;
@@ -1604,19 +1618,19 @@ label.control-label {
   margin-bottom: 7px;
 }
 .form-group .form-control::-moz-placeholder {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
 }
 .form-group .form-control:-ms-input-placeholder {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
 }
 .form-group .form-control::-webkit-input-placeholder {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
@@ -1624,13 +1638,13 @@ label.control-label {
 .form-group .checkbox label,
 .form-group .radio label,
 .form-group label {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #AAAAAA;
   font-weight: 400;
 }
 .form-group label.control-label {
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.07143;
   color: #AAAAAA;
   font-weight: 400;
@@ -2000,8 +2014,8 @@ legend {
 
 .navbar {
   border: 0;
-  border-radius: 3px;
-  box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.42), 0 3px 20px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  border-radius: 0px;
+  box-shadow: 0 4px 12px -12px rgba(0, 0, 0, 0.42), 0 3px 20px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   padding: 10px 0;
 }
 .navbar .navbar-brand {
@@ -3627,7 +3641,7 @@ h2.title {
 .navbar-absolute {
   position: absolute;
   width: 100%;
-  padding-top: 10px;
+  padding-top: 17px;
   z-index: 1031;
 }
 
@@ -3718,7 +3732,7 @@ h2.title {
 }
 
 .signup-page .wrapper .card-signup3 {
-  margin: 110px 0 5px;
+  margin: 90px 0 5px;
 }
 
 
