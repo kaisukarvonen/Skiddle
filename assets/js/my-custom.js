@@ -158,7 +158,7 @@ function startTimer(duration, display) {
     setInterval(timer, 1000);
 	
 	window.setTimeout(function() {
-	window.location = "index.html"}, duration*1000); //milliseconds to seconds
+	window.location = "gameover.html"}, duration*1000); //milliseconds to seconds
 }
 
 var countdownTime = parseInt(localStorage.getItem('countdownTime'));
@@ -189,6 +189,13 @@ $(function() {
 	$(".emptyWordsList").click(function() {
 		allWords = [];
 	});
+});
+
+
+$(function() {
+	if($('body').is('.gameover')) {
+		$("li")
+	}
 });
 		
 
