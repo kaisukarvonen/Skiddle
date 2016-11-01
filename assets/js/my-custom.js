@@ -1,6 +1,19 @@
 
 $(function() {
 	
+	if($('body').is('.index')) {
+		navigator.geolocation.getCurrentPosition(onLocationSuccess, onLocationError);
+		/* based on country code check if there is file named /location-countrycode-words.txt
+		-> if not: disable checkbox location-words
+		*/
+		
+
+	}
+});
+
+
+$(function() {
+	
 	if($('body').is('.game-menu')) {
 		
 		$('#time-slider').noUiSlider({
@@ -11,15 +24,69 @@ $(function() {
 				max: 300
 			}
 		});
+		resetTimer();
 		
-		/*if doesnt work, replace with input box: xx minutes (so can be from 1-whatever);
-		default value is 2 minutes, up and down arrows 
-		*/
-		countdownTime = 20; //this never changes
-		localStorage.setItem('countdownTime', parseInt(countdownTime));
+		if (countryIsValid == 'true') {
+				console.log(localStorage.getItem('countryIsValid'));
+				
+		} else {
+			console.log(localStorage.getItem('countryIsValid'));
+			$("#location-words").prop('disabled', true);
+		}
 	}
 });
 
+
+$(function() {
+	if($('body').is('.playpage')) {
+		setRandomWord();
+		startTimer(window.countdownTime, document.querySelector('#remaining-time'));
+	}
+
+
+	$(".word-is-done").click(function() {
+		saveDoneWordtoList(window.chosenWord);
+	});
+
+
+	$(".skip-word").click(function() {
+		saveSkippedWordtoList(window.chosenWord);
+	});
+	
+	
+	//for testing
+	$(".emptyWordsList").click(function() {
+		allWords = [];
+	});
+});
+
+
+function listWordsOnPage(array, element) {
+	for (var i=0; i < array.length; i++) {
+		$(element).append("<li><span>"+array[i]+"</span></li>");
+	}
+}
+
+$(function() {
+	if($('body').is('.gameover')) {
+		resetTimer();
+		listWordsOnPage(roundDoneWords, '#list-done-words');
+		listWordsOnPage(roundSkippedWords, '#list-skipped-words');
+	}
+	
+	$('.play-again').click(function() {
+		emptyArray(roundDoneWords, 'roundDoneWords');
+		emptyArray(roundSkippedWords, 'roundSkippedWords');
+		window.location = "playpage.html";
+	});
+});
+		
+
+$(function() {
+    $(".take-picture").click(function() {
+		capturePhotoEdit();
+	});
+});
 
 
 
@@ -27,12 +94,15 @@ $(function() {
 
 var allWords = JSON.parse(localStorage.getItem('allWords')) || [];
 var gamemodes = JSON.parse(localStorage.getItem('gamemodes')) || [];
+var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
+var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
 
 $(function() {
     $("#handle-settings").click(function() {
 		gamemodes = [];
-		roundDoneWords = [];
-		roundSkippedWords = [];
+		emptyArray(roundDoneWords, 'roundDoneWords');
+		emptyArray(roundSkippedWords, 'roundSkippedWords');
+		
 		//allWords is emptied when app is closed? 
 		
 		if ($('#explain-words').is(':checked')) {
@@ -46,11 +116,20 @@ $(function() {
 		}
 		
 		localStorage.setItem("gamemodes", JSON.stringify(gamemodes));
-		//reset countdownTime
 		window.location = "playpage.html";
 	});
 });
 
+
+function resetTimer() {
+	countdownTime = 20;
+	localStorage.setItem('countdownTime', parseInt(countdownTime));
+}
+
+function emptyArray(array, element) {
+	array = [];
+	localStorage.setItem(element, JSON.stringify(array));
+}
 
 
 
@@ -60,14 +139,16 @@ function wordFromFile(fileName) {
 		var randomIndex = Math.floor(Math.random() * lines.length);
 		var word = lines[randomIndex];
 		window.chosenWord = word;
-		//console.log("wordFromFile: "+word);
 		if (wordIsUsed(word)) {
 			wordFromFile(fileName);
 		}
 		return word;
 	});
-	
 }
+
+
+//If you return a promise, the next 'then' in the chain will use the value that the promise resolves to.
+
 
 function wordIsUsed(word) {
 	var allWordsList = JSON.parse(localStorage.getItem("allWords"));
@@ -84,44 +165,43 @@ function wordIsUsed(word) {
 	return false;
 }
 
-var chosenWord;
+var chosenWord; //nollaantuu aina kun uusi sivu ladataan
 
 function setRandomWord() {
 	var randomMode = gamemodes[Math.floor(Math.random() * gamemodes.length)];
-	console.log("random: "+randomMode);
-	console.log(gamemodes);
-	console.log(JSON.parse(localStorage.getItem('allWords')));
+	console.log("random: "+randomMode+", modes:" +gamemodes);
+	console.log("allWords:" +JSON.parse(localStorage.getItem('allWords')));
 	
 	if (randomMode == "explain" || randomMode == "locationwords") {
-		$('#word-title').append("<h4>Explain it!</h4>");
+		$('#word-title').append("<h3>Explain it!</h3>");
 	} else {
-		$('#word-title').append("<h4>Mimic it!</h4>");
+		$('#word-title').append("<h3>Mimic it!</h3>");
 	}
 	
 	if (randomMode == "explain") {
 		return wordFromFile("http://scoctail.com/english-explain-words.txt").then(appendWord);
 	} else if (randomMode == "mime") {
 		return wordFromFile("http://scoctail.com/english-mime-words.txt").then(appendWord);
+	} else if (randomMode == "locationwords") {
+		return wordFromFile("http://scoctail.com/location-"+countrycode+"-words.txt").then(appendWord);
 	}
 }
 
 function appendWord(word) {
 	$('.word').text(word);
+	saveWordToAllWordsList(window.chosenWord);
 }
 
-var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
-var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
+
 
 function saveDoneWordtoList(word) {
 	roundDoneWords.push(word);
 	localStorage.setItem('roundDoneWords', JSON.stringify(roundDoneWords));
-	//alert("done this round:" +roundDoneWords);
 }
 
 function saveSkippedWordtoList(word) {
 	roundSkippedWords.push(word);
 	localStorage.setItem('roundSkippedWords', JSON.stringify(roundSkippedWords));
-	//alert("skipped this round:" +roundSkippedWords);
 }
 
 function saveWordToAllWordsList(word) {
@@ -158,52 +238,58 @@ function startTimer(duration, display) {
     setInterval(timer, 1000);
 	
 	window.setTimeout(function() {
-	window.location = "gameover.html"}, duration*1000); //milliseconds to seconds
+	window.location = "gameover.html"}, duration*1000);
 }
 
 var countdownTime = parseInt(localStorage.getItem('countdownTime'));
 
 
 
-$(function() {
-	if($('body').is('.playpage')) {
-		setRandomWord();
-		startTimer(window.countdownTime, document.querySelector('#remaining-time'));
-		
-	}
 
+var countrycode = localStorage.getItem('countrycode');
 
-	$(".word-is-done").click(function() {
-		saveWordToAllWordsList(window.chosenWord);
-		saveDoneWordtoList(window.chosenWord);
-	});
+var onLocationSuccess = function(position) {
+        getCountrycode(position.coords.latitude, position.coords.longitude);
+    };
 
+    // onError Callback receives a PositionError object
+    //
+function onLocationError(error) {
+     alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + '\n');
+    }
 
-	$(".skip-word").click(function() {
-		saveWordToAllWordsList(window.chosenWord);
-		saveSkippedWordtoList(window.chosenWord);
-	});
 	
+var countryIsValid = localStorage.getItem('countryIsValid');
 	
-	//for testing
-	$(".emptyWordsList").click(function() {
-		allWords = [];
-	});
-});
-
-
-$(function() {
-	if($('body').is('.gameover')) {
-		$("li")
-	}
-});
+function getCountrycode(lat, lng) {
+	grid = codegrid.CodeGrid();
+	grid.getCode(lat, lng, function (error, code) {
+		if (error) {
+			console.log("Error: could not get country code");
+		}
+		countrycode = code;
+		localStorage.setItem('countrycode', countrycode);
+		console.log("current countrycode: " +countrycode);
 		
-
-$(function() {
-    $(".take-picture").click(function() {
-		capturePhotoEdit();
+		$.ajax({
+			type: 'HEAD',
+			url: 'http://scoctail.com/location-'+countrycode+'-words.txt',
+			success: function() {
+				console.log("page found");
+				countryIsValid = 'true';
+				localStorage.setItem('countryIsValid', countryIsValid);
+			},
+			error: function() {
+				console.log("page NOT FOUND");
+				countryIsValid = 'false';
+				localStorage.setItem('countryIsValid', countryIsValid);
+			}
+		});
+		
 	});
-});
+}
+
 
 
     var pictureSource;   // picture source
