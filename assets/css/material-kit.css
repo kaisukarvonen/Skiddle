@@ -25,8 +25,8 @@ body.inverse .card .form-control {
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
-  font-size:16px;
-  line-height: 1.2em;
+  font-size:18px;
+  line-height: 1.1em;
 }
 
 p.header-title {
@@ -35,7 +35,6 @@ p.header-title {
 	margin-left:26%;
 	font-size:20px;
 }
-
 
 a, a:hover, a:focus {
   color: #444;
@@ -53,7 +52,7 @@ a.white-link, a.white-link:active {
 
 .current-word {
 	padding:16px 0 62px 0;
-	font-size:24px;
+	font-size:27px;
 	text-transform: uppercase;
 	color:#5AA892;
 }
@@ -97,6 +96,11 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 	margin-right:25px;
 }
 
+
+#remaining-time {
+	color:#5AA892;
+	font-size:27px;
+}
 	
 
 /*           Animations              */
