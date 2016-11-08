@@ -57,6 +57,7 @@ $(function() {
 	//for testing
 	$(".emptyWordsList").click(function() {
 		allWords = [];
+		localStorage.setItem("allWords", JSON.stringify(allWords));
 	});
 });
 
@@ -232,6 +233,7 @@ function startTimer(duration, display) {
         if (diff <= 0) {
             start = Date.now() + 1000;
         }
+		vibrateTimeIsRunningOut();
     };
     // we don't want to wait a full second before the timer starts
     timer();
@@ -243,6 +245,13 @@ function startTimer(duration, display) {
 
 var countdownTime = parseInt(localStorage.getItem('countdownTime'));
 
+
+function vibrateTimeIsRunningOut() {
+	if (parseInt(localStorage.getItem('countdownTime')) == 10) {
+		navigator.vibrate(2000);
+		console.log("im here");
+	} 
+}
 
 
 

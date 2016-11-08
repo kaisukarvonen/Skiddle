@@ -1054,7 +1054,7 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
   cursor: pointer;
   color: #333;
   padding-top: 7px;
-    font-size:16px;
+   font-size:18px;
 }
 .form-group.is-focused .togglebutton label {
   color:#5AA892;
@@ -1078,7 +1078,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .togglebutton label input[type=checkbox][disabled] + .toggle {
   content: "";
   display: inline-block;
-  width: 30px;
+  width: 40px;
   height: 15px;
   background-color: rgba(80, 80, 80, 0.7);
   border-radius: 15px;
@@ -1107,7 +1107,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(0, 0, 0, 0.1);
 }
 .togglebutton label input[type=checkbox]:checked + .toggle:after {
-  left: 15px;
+  left: 28px;
 }
 .togglebutton label input[type=checkbox]:checked + .toggle {
   background-color: #5AA892;
