@@ -89,6 +89,54 @@ $(function() {
 	});
 });
 
+$(function() {
+	$("#register").click(function() {
+		var username = $("#username").val();
+		var email = $("#email").val();
+		var password = $("#password").val();
+		var passwordAgain = $("#password-again").val();
+		//alert(username+", "+email+", "+password+", "+passwordAgain);
+		
+		if (username=='' || email=='' || password=='' || passwordAgain=='') {
+			$(".alert").css("display", "block");
+			$("#error-text").text("Please fill all fields!");
+		} else if (username.length < 5) {
+			$(".alert").css("display", "block");
+			$("#error-text").text("Username must be at least 5 characters long!");
+		} else if (password != passwordAgain) {
+			$(".alert").css("display", "block");
+			$("#error-text").text("Passwords do not match!");
+		} else if (password.length < 6) {
+			$(".alert").css("display", "block");
+			$("#error-text").text("Password must be at least 6 characters long!");
+		} else if (!isValidEmail(email)) {
+			$(".alert").css("display", "block");
+			$("#error-text").text("Email is not valid!");
+		} else {
+			$(".alert").css("display", "none");
+			$.post("http://scoctail.com/register.php", {
+				username1: username,
+				email1 : email,
+				password1: password
+				}, function (data) {
+					if (data == "registerSuccessfull") {
+						alert("register done");
+					} else {
+						alert("register error");
+					}
+					alert(data);
+				});
+			}
+		
+	});
+});
+
+
+function isValidEmail(email) {
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+}
+
 
 
 

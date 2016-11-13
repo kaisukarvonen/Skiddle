@@ -2518,13 +2518,14 @@ legend {
 .alert {
   border: 0;
   border-radius: 0;
-  padding: 20px 15px;
-  line-height: 20px;
+  padding: 13px;
+  display:none;
+ 
 }
 .alert b {
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 13px;
 }
 .alert, .alert.alert-default {
   background-color: white;
@@ -3732,7 +3733,7 @@ h2.title {
 }
 
 .signup-page .wrapper .card-signup2 {
-  margin: 30px 0 5px;
+  margin: 22px 0 5px;
 }
 
 .signup-page .wrapper .card-signup3 {
