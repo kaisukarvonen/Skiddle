@@ -127,6 +127,12 @@ $(function() {
 						$(".modal-title").css("color", "#5AA892");
 						$(".modal-body").text("Your account has been successfully activated. You can log in now!");
 						$("#myModal").modal({show: true});
+					} else if (data == "emailTaken") {
+						$("#log-in-modal").css("display", "none");
+						$(".modal-title").text("Email is in use");
+						$(".modal-title").css("color", "red");
+						$(".modal-body").text("This email is already in use, please choose a different one.");
+						$("#myModal").modal({show: true});
 					} else {
 						console.log("register error");
 						$("#log-in-modal").css("display", "none");
@@ -142,11 +148,10 @@ $(function() {
 
 
 $(function() {
-	$("#sign-in").click(function() {
+	$("#login").click(function() {
 		var username = $("#username").val();
 		var password = $("#password").val();
 		if (username == '') {
-			$("#log-in-modal").css("display", "inline");
 			$(".modal-title").text("Error");
 			$(".modal-title").css("color", "red");
 			$(".modal-body").text("Please enter your username.");
@@ -163,16 +168,17 @@ $(function() {
 				password1: password
 				}, function (data) {
 					if (data == "loginSuccessfull") {
+						
 						window.location = "game-menu.html";
 					} else {
-						$("#log-in-modal").css("display", "inline");
 						$(".modal-title").text("Login failed");
 						$(".modal-title").css("color", "red");
 						$(".modal-body").text("Username and password do not match!");
 						$("#myModal").modal({show: true});
 					}
 				});
-			}
+		}
+		
 	});
 });
 
@@ -378,12 +384,10 @@ function getCountrycode(lat, lng) {
 			type: 'HEAD',
 			url: 'http://scoctail.com/location-'+countrycode+'-words.txt',
 			success: function() {
-				console.log("page found");
 				countryIsValid = 'true';
 				localStorage.setItem('countryIsValid', countryIsValid);
 			},
 			error: function() {
-				console.log("page NOT FOUND");
 				countryIsValid = 'false';
 				localStorage.setItem('countryIsValid', countryIsValid);
 			}
