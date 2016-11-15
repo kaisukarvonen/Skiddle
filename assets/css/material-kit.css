@@ -47,7 +47,7 @@ a.nav-icon-link, a.nav-icon-link:active {
 
 a.white-link, a.white-link:active {
   color: #fff;
-  font-size:15px;
+  font-size:16px;
 }
 
 .current-word {
@@ -3580,7 +3580,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 
 .no-account-link {
 	text-align: center;
-	padding:7px 0 13px 0;
+	padding:14px 0 23px 0;
 }
 
 

@@ -33,6 +33,20 @@
 <div class="signup-page">
 
 	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title" id="myModalLabel"></h4></div>
+		  <div class="modal-body"></div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
 	<!-- you can use the class main-raised if you want the main area to be as a page with shadows -->
     <div class="wrapper">
 		<div class="header header-filter" style="background-image: url('assets/img/wallpaper.jpg'); background-size: cover; background-position: top center;">
@@ -63,7 +77,7 @@
 					</div>
 					</div>
 					<div class="footer text-center">
-					<a href="#mainPage" class="btn btn-primary btn-raised">Sign in</a>
+					<button id="sign-in" class="btn btn-primary btn-raised">Sign in</button>
 					</div>
 					<div class="no-account-link"><a href="register.html">Don't have an account?</a></div>
 					<!-- popup jos salasana tai tunnus menee väärin-->

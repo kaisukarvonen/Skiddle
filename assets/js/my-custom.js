@@ -137,7 +137,42 @@ $(function() {
 					}
 				});
 			}
-		
+	});
+});
+
+
+$(function() {
+	$("#sign-in").click(function() {
+		var username = $("#username").val();
+		var password = $("#password").val();
+		if (username == '') {
+			$("#log-in-modal").css("display", "inline");
+			$(".modal-title").text("Error");
+			$(".modal-title").css("color", "red");
+			$(".modal-body").text("Please enter your username.");
+			$("#myModal").modal({show: true});
+		} else if (password == '') {
+			$("#log-in-modal").css("display", "inline");
+			$(".modal-title").text("Error");
+			$(".modal-title").css("color", "red");
+			$(".modal-body").text("Please enter your password.");
+			$("#myModal").modal({show: true});
+		} else {
+			$.post("http://scoctail.com/login.php", {
+				username1: username,
+				password1: password
+				}, function (data) {
+					if (data == "loginSuccessfull") {
+						window.location = "game-menu.html";
+					} else {
+						$("#log-in-modal").css("display", "inline");
+						$(".modal-title").text("Login failed");
+						$(".modal-title").css("color", "red");
+						$(".modal-body").text("Username and password do not match!");
+						$("#myModal").modal({show: true});
+					}
+				});
+			}
 	});
 });
 
