@@ -394,7 +394,7 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .btn.btn-info.btn-simple,
 .navbar .navbar-nav > li > a.btn.btn-info.btn-simple {
   background-color: transparent;
-  color: #03a9f4;
+  color: #5AA892;
   box-shadow: none;
 }
 .btn.btn-info.btn-simple:hover, .btn.btn-info.btn-simple:focus, .btn.btn-info.btn-simple:active,
@@ -2977,10 +2977,15 @@ h2.title {
   padding-right: 0;
 }
 
+.log-in-modal {
+	display:inline;
+}
+
 .modal-content {
   box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
   border-radius: 3px;
   border: none;
+  display:block;
 }
 .modal-content .modal-header {
   border-bottom: none;

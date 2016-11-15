@@ -114,17 +114,27 @@ $(function() {
 			$("#error-text").text("Email is not valid!");
 		} else {
 			$(".alert").css("display", "none");
+			
 			$.post("http://scoctail.com/register.php", {
 				username1: username,
 				email1 : email,
 				password1: password
 				}, function (data) {
 					if (data == "registerSuccessfull") {
-						alert("register done");
+						console.log("register done");
+						$("#log-in-modal").css("display", "inline");
+						$(".modal-title").text("Registration complete");
+						$(".modal-title").css("color", "#5AA892");
+						$(".modal-body").text("Your account has been successfully activated. You can log in now!");
+						$("#myModal").modal({show: true});
 					} else {
-						alert("register error");
+						console.log("register error");
+						$("#log-in-modal").css("display", "none");
+						$(".modal-title").text("Account registration failed");
+						$(".modal-title").css("color", "red");
+						$(".modal-body").text("An error occured during registration, please try again later.");
+						$("#myModal").modal({show: true});
 					}
-					alert(data);
 				});
 			}
 		
