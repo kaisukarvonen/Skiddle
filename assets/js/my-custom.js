@@ -7,6 +7,8 @@ $(function() {
 		-> if not: disable checkbox location-words
 		*/
 		
+		window.user = null;
+		localStorage.setItem('user', user);
 
 	}
 });
@@ -33,6 +35,11 @@ $(function() {
 			console.log(localStorage.getItem('countryIsValid'));
 			$("#location-words").prop('disabled', true);
 		}
+		
+		if (window.user == 'null') {
+			$(".nav-icon-link").css('display', 'none');
+		}
+		console.log("current user:"+window.user);
 	}
 });
 
@@ -81,13 +88,35 @@ $(function() {
 		window.location = "playpage.html";
 	});
 });
+
+
+
+$(function() {
+	if($('body').is('.profile')) {
+		
+		showProfilePicture(window.user);
+	}
+});
+
+
+function showProfilePicture(webuser) {
+	$("#profile-picture").attr("src", "http://scoctail.com/images/profile-pic-"+webuser+".jpg");
+	$(".header-title").text(webuser);
+}
+
+
+function showDefaultPicture() {
+	$("#profile-picture").attr("src", "assets/img/default-profile-pic.jpg");
+}
 		
 
 $(function() {
-    $(".take-picture").click(function() {
-		capturePhotoEdit();
+    $("#take-picture").click(function() {
+		capturePhoto();
 	});
 });
+
+
 
 $(function() {
 	$("#register").click(function() {
@@ -146,6 +175,8 @@ $(function() {
 	});
 });
 
+var user = localStorage.getItem('user');
+
 
 $(function() {
 	$("#login").click(function() {
@@ -168,7 +199,7 @@ $(function() {
 				password1: password
 				}, function (data) {
 					if (data == "loginSuccessfull") {
-						
+						localStorage.setItem('user', username);
 						window.location = "game-menu.html";
 					} else {
 						$(".modal-title").text("Login failed");
@@ -398,83 +429,57 @@ function getCountrycode(lat, lng) {
 
 
 
-    var pictureSource;   // picture source
-    var destinationType; // sets the format of returned value 
-    // Wait for PhoneGap to connect with the device
-    //
-    document.addEventListener("deviceready",onDeviceReady,false);
-    // PhoneGap is ready to be used!
-    //
-    function onDeviceReady() {
-        pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
-    }
+var pictureSource;  
+var destinationType; 
 
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoDataSuccess(imageData) {
-      // Uncomment to view the base64 encoded image data
-      // console.log(imageData);
+document.addEventListener("deviceready",onDeviceReady,false);
+	
+function onDeviceReady() {
+    pictureSource=navigator.camera.PictureSourceType;
+    destinationType=navigator.camera.DestinationType;
+}
 
-      // Get image handle
-      //
-      var smallImage = document.getElementById('smallImage');
 
-      // Unhide image elements
-      //
-      smallImage.style.display = 'block';
+function capturePhoto() {
+ navigator.camera.getPicture(uploadPhoto, function(message) {
+ alert('get picture failed');
+ }, {
+ quality: 100,
+ destinationType: navigator.camera.DestinationType.FILE_URI,
+ sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+ });
+}
 
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-      smallImage.src = "data:image/jpeg;base64," + imageData;
-    }
+function uploadPhoto(imageURI) {
+	 var options = new FileUploadOptions();
+	 options.fileKey = "file";
+	 options.fileName = "profile-pic-"+window.user+".jpg";
+	 options.mimeType = "image/jpeg";
+	 console.log(options.fileName);
+	 var params = new Object();
+	 params.value1 = "test";
+	 params.value2 = "param";
+	 options.params = params;
+	 options.chunkedMode = false;
 
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoURISuccess(imageURI) {
-      // Uncomment to view the image file URI 
-      // console.log(imageURI);
+	var ft = new FileTransfer();
+	 ft.upload(imageURI, "http://scoctail.com/upload.php", function(result){
+	 console.log(JSON.stringify(result));
+	 //showProfilePicture(window.user); how to load new image without navigating back to page.. clear cache etc?
+	 }, function(error){
+	 console.log(JSON.stringify(error));
+	 }, options);
+}
 
-      // Get image handle
-      //
-      var largeImage = document.getElementById('largeImage');
 
-      // Unhide image elements
-      //
-      largeImage.style.display = 'block';
 
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-      largeImage.src = imageURI;
-    }
+function getPhoto(source) {
+    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+    destinationType: destinationType.FILE_URI,
+    sourceType: source });
+}
 
-    // A button will call this function
-    //
-    function capturePhoto() {
-      // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
-    }
 
-    // A button will call this function
-    //
-    function capturePhotoEdit() {
-      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true }); 
-    }
-
-    // A button will call this function
-    //
-    function getPhoto(source) {
-      // Retrieve image file location from specified source
-      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
-        destinationType: destinationType.FILE_URI,
-        sourceType: source });
-    }
-
-    // Called if something bad happens.
-    // 
     function onFail(message) {
       alert('Failed because: ' + message);
     }

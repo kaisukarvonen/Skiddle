@@ -43,7 +43,24 @@ a, a:hover, a:focus {
 
 a.nav-icon-link, a.nav-icon-link:active {
   color: #eee;
+  display:inline;
 }
+
+.profile-picture-circle {
+	height:200px;
+	width:200px;
+	display:block;
+	margin-left: auto;
+    margin-right: auto;
+	border-radius:100px;
+}
+
+
+.profile-photo {
+	text-align:center;
+	padding-bottom:30px;
+}
+
 
 a.white-link, a.white-link:active {
   color: #fff;
@@ -753,7 +770,8 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .navbar .navbar-nav > li > a.btn.btn-sm, .btn-group-sm
 .navbar .navbar-nav > li > a.btn {
   padding: 5px 20px;
-  font-size: 11px;
+  font-size: 13px;
+  border-radius:40px;
 }
 .btn.btn-xs, .btn-group-xs .btn,
 .navbar .navbar-nav > li > a.btn.btn-xs, .btn-group-xs
