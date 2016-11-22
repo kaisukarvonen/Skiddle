@@ -22,11 +22,30 @@ body.inverse .card .form-control {
   background: #FFFFFF;
 }
 
+.green-link, .green-link:hover, a.green-link:focus {
+	font-size:19px;
+	color:#5AA892;
+}
+
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   font-size:19px;
   line-height: 1.1em;
+}
+
+.settings-content {
+	line-height:2.6em;
+}
+
+#log-out {
+  margin:50px 0 10px 0;
+  
+}
+
+#game-version {
+	font-size:15px;
+	color:#777;
 }
 
 p.header-title {
@@ -769,8 +788,8 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .btn.btn-sm, .btn-group-sm .btn,
 .navbar .navbar-nav > li > a.btn.btn-sm, .btn-group-sm
 .navbar .navbar-nav > li > a.btn {
-  padding: 5px 20px;
-  font-size: 13px;
+  padding: 7px 20px;
+  font-size: 15px;
   border-radius:40px;
 }
 .btn.btn-xs, .btn-group-xs .btn,
@@ -3761,7 +3780,7 @@ h2.title {
 }
 
 .signup-page .wrapper .card-signup3 {
-  margin: 90px 0 5px;
+  margin: 70px 0 5px;
 }
 
 

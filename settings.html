@@ -4,12 +4,12 @@
 	<meta charset="utf-8" />
 <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;">
 
-
 	<title>Mobile App</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 	<!--     Fonts and icons     -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" href="http://cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 	<!-- CSS Files -->
@@ -30,7 +30,7 @@
 	<script type="text/javascript" src="cordova.js"></script>
 </head>
 
-<body class="profile">
+<body class="settings">
 
 
 
@@ -40,12 +40,13 @@
     	<div class="container">
 			
 			<a href="game-menu.html" class="nav-icon-link"><i class="material-icons">chevron_left</i></a>
-			<p class="header-title">Username</p>
-			<a href="settings.html" class="icon-header-right"><i class="material-icons">settings</i></a>
+			<p class="header-title">Settings</p>
+			<a href="index.html" class="icon-header-right"><i class="material-icons">settings</i></a>
         	
     	</div>
     </nav>
 	
+	<!-- you can use the class main-raised if you want the main area to be as a page with shadows -->
     <div class="wrapper">
 		<div class="header header-filter" style="background-color:#ededed; background-size: cover; background-position: top center;">
 		<div class="container">
@@ -56,30 +57,23 @@
 		
 			<form class="form" method="" action="">
 					<div class="content">
+					<div class="footer text-center">
+					<div class="settings-content">
+						<div id="game-version">MobileGame version 1.0</div>
 					
-						<div class="profile-photo">
-						<img id="profile-picture" src="" onerror="showDefaultPicture()" class="profile-picture-circle">
-						<div id="change-picture"><a class="green-link">Change photo</a></div>
-						</div>
+						(Notifications)<br>
+						Suggest words<br>
 						
+						Share on social media<br>
 						
-						<div class="input-group">
-						<span class="input-group-addon">
-						<i class="material-icons">lock_outline</i>
-						</span>
-						<input type="password" id="new-password" placeholder="New password..." class="form-control" />
+						<img src="assets/img/whatsapp_icon.png" height="50px" id="shareWhatsapp">
+						<img src="assets/img/twitter_icon.png" height="45px" id="shareTwitter">
+						<img src="assets/img/email_icon.png" height="48px" id="shareEmail">
+					</div>
+						<div id="log-out"><a class="green-link">Log out</a></div>
 						</div>
-						<div class="input-group">
-						<span class="input-group-addon">
-						<i class="material-icons">lock_outline</i>
-						</span>
-						<input type="password" id="new-password-again" placeholder="Confirm password..." class="form-control" />
-						</div>
-						<div class="footer text-center">
-						<input type="button" id="change-password" value="Save changes" class="btn btn-primary btn-raised btn-sm"/>
-						</div>
-	                </div>
-
+					
+					</div>
 			</form>
 			
 			</div>

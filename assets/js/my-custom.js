@@ -6,9 +6,6 @@ $(function() {
 		/* based on country code check if there is file named /location-countrycode-words.txt
 		-> if not: disable checkbox location-words
 		*/
-		
-		window.user = null;
-		localStorage.setItem('user', user);
 
 	}
 });
@@ -39,7 +36,7 @@ $(function() {
 		if (window.user == 'null') {
 			$(".nav-icon-link").css('display', 'none');
 		}
-		console.log("current user:"+window.user);
+		console.log("current user:"+window.user+"fff");
 	}
 });
 
@@ -111,7 +108,7 @@ function showDefaultPicture() {
 		
 
 $(function() {
-    $("#take-picture").click(function() {
+    $("#change-picture").click(function() {
 		capturePhoto();
 	});
 });
@@ -156,11 +153,11 @@ $(function() {
 						$(".modal-title").css("color", "#5AA892");
 						$(".modal-body").text("Your account has been successfully activated. You can log in now!");
 						$("#myModal").modal({show: true});
-					} else if (data == "emailTaken") {
+					} else if (data == "usernameTaken") {
 						$("#log-in-modal").css("display", "none");
-						$(".modal-title").text("Email is in use");
+						$(".modal-title").text("Username is taken");
 						$(".modal-title").css("color", "red");
-						$(".modal-body").text("This email is already in use, please choose a different one.");
+						$(".modal-body").text("This username is already in use, please choose a different one.");
 						$("#myModal").modal({show: true});
 					} else {
 						console.log("register error");
@@ -182,6 +179,8 @@ $(function() {
 	$("#login").click(function() {
 		var username = $("#username").val();
 		var password = $("#password").val();
+		var trimUsername = username.trim();
+		var trimPassword = password.trim();
 		if (username == '') {
 			$(".modal-title").text("Error");
 			$(".modal-title").css("color", "red");
@@ -195,11 +194,11 @@ $(function() {
 			$("#myModal").modal({show: true});
 		} else {
 			$.post("http://scoctail.com/login.php", {
-				username1: username,
-				password1: password
+				username1: trimUsername,
+				password1: trimPassword
 				}, function (data) {
 					if (data == "loginSuccessfull") {
-						localStorage.setItem('user', username);
+						localStorage.setItem('user', trimUsername);
 						window.location = "game-menu.html";
 					} else {
 						$(".modal-title").text("Login failed");
@@ -214,9 +213,46 @@ $(function() {
 });
 
 
+$(function() {
+	if($('body').is('.settings')) {
+		if (window.user == 'null') {
+			$("#log-out").css("display", "none");
+		}
+	}
+	
+	$("#shareWhatsapp").click(function() {
+		var text = "I'm playing MobileGame and you should too!"
+		var url = "http://someurl.com";
+		window.plugins.socialsharing.shareViaWhatsApp(text, null /* img */, url, function() {
+			console.log('whatsappshare ok');
+		}, function(errormsg){
+			alert(errormsg);
+		});
+	});
+	
+	
+	
+});
+
+
+
+
+$(function () {
+	$("#log-out").click(function() {
+		logout(window.user);
+	});
+});
+
+
 function isValidEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   return regex.test(email);
+}
+
+function logout(webuser) {
+		window.user = null;
+		localStorage.setItem('user', user);
+		window.location="index.html";
 }
 
 
@@ -377,9 +413,8 @@ var countdownTime = parseInt(localStorage.getItem('countdownTime'));
 
 
 function vibrateTimeIsRunningOut() {
-	if (parseInt(localStorage.getItem('countdownTime')) == 10) {
+	if (parseInt(localStorage.getItem('countdownTime')) == 5) {
 		navigator.vibrate(2000);
-		console.log("im here");
 	} 
 }
 
@@ -465,7 +500,7 @@ function uploadPhoto(imageURI) {
 	var ft = new FileTransfer();
 	 ft.upload(imageURI, "http://scoctail.com/upload.php", function(result){
 	 console.log(JSON.stringify(result));
-	 //showProfilePicture(window.user); how to load new image without navigating back to page.. clear cache etc?
+	 window.location.reload();
 	 }, function(error){
 	 console.log(JSON.stringify(error));
 	 }, options);
