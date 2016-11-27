@@ -111,6 +111,40 @@ $(function() {
     $("#change-picture").click(function() {
 		capturePhoto();
 	});
+	
+	$("#change-password").click(function() {
+		var newPassword = $("#new-password").val();
+		var newPasswordAgain = $("#new-password-again").val();
+		
+		if (newPassword != newPasswordAgain) {
+			$("#password-change-error-text").text("Passwords do not match!");
+		} else if (newPassword.length < 6) {
+			$("#password-change-error-text").text("Password must be at least 6 characters long!");
+		} else {
+			$("#password-change-error-text").text(" ");
+			$.post("http://scoctail.com/changepassword.php", {
+				password1: newPassword,
+				username1: window.user
+				}, function (data) {
+					if (data == "passwordChanged") {
+						$(".modal-title").text("Password changed");
+						$(".modal-title").css("color", "#5AA892");
+						$(".modal-body").text("Your password has been changed now!");
+						$("#myModal").modal({show: true});
+						$("#new-password").val("");
+						$("#new-password-again").val("");
+					} else {
+						$(".modal-title").text("Password change failed");
+						$(".modal-title").css("color", "red");
+						$(".modal-body").text("An error occured during registration, please try again later.");
+						$("#myModal").modal({show: true});
+					}
+				}
+					
+			);
+		}
+		
+	});
 });
 
 
@@ -153,6 +187,10 @@ $(function() {
 						$(".modal-title").css("color", "#5AA892");
 						$(".modal-body").text("Your account has been successfully activated. You can log in now!");
 						$("#myModal").modal({show: true});
+						$("#username").val("");
+						$("#email").val("");
+						$("#password").val("");
+						$("#password-again").val("");
 					} else if (data == "usernameTaken") {
 						$("#log-in-modal").css("display", "none");
 						$(".modal-title").text("Username is taken");
@@ -200,13 +238,19 @@ $(function() {
 					if (data == "loginSuccessfull") {
 						localStorage.setItem('user', trimUsername);
 						window.location = "game-menu.html";
-					} else {
+					} else if (data == "noMatchError") {
 						$(".modal-title").text("Login failed");
 						$(".modal-title").css("color", "red");
 						$(".modal-body").text("Username and password do not match!");
 						$("#myModal").modal({show: true});
+					} else {
+						$(".modal-title").text("Login failed");
+						$(".modal-title").css("color", "red");
+						$(".modal-body").text("An error occured during login, please try again later.");
+						$("#myModal").modal({show: true});
 					}
-				});
+			});
+			
 		}
 		
 	});
@@ -221,7 +265,7 @@ $(function() {
 	}
 	
 	$("#shareWhatsapp").click(function() {
-		var text = "I'm playing MobileGame and you should too!"
+		var text = "I'm playing MobileGame and you should too!";
 		var url = "http://someurl.com";
 		window.plugins.socialsharing.shareViaWhatsApp(text, null /* img */, url, function() {
 			console.log('whatsappshare ok');
@@ -230,9 +274,41 @@ $(function() {
 		});
 	});
 	
+	$("#shareTwitter").click(function() {
+		var text = "I'm playing MobileGame and you should too!";
+		var url = "http://someurl.com";
+		window.plugins.socialsharing.shareViaTwitter(text, null /* img */, url, function() {
+			console.log('twittershare ok');
+		}, function(errormsg){
+			alert(errormsg);
+		});
+	});
 	
+	
+	$("#shareEmail").click(function() {
+		window.plugins.socialsharing.shareViaEmail(
+			  "I'm playing MobileGame and you should too!", // can contain HTML tags, but support on Android is rather limited:  http://stackoverflow.com/questions/15136480/how-to-send-html-content-with-image-through-android-default-email-client 
+			  "Invitation for MobileGame App",
+			  ['to@person1.com'], // TO: must be null or an array 
+			  null, // CC: must be null or an array 
+			  null, // BCC: must be null or an array 
+			  ['https://www.google.nl/images/srpr/logo4w.png','www/localimage.png'], // FILES: can be null, a string, or an array 
+			  onSuccess, // called when sharing worked, but also when the user cancelled sharing via email. On iOS, the callbacks' boolean result parameter is true when sharing worked, false if cancelled. On Android, this parameter is always true so it can't be used). See section "Notes about the successCallback" below. 
+			  onError // called when sh*t hits the fan 
+		);
+	});
 	
 });
+
+
+var onSuccess = function(result) {
+  console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true 
+  console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false) 
+}
+ 
+var onError = function(msg) {
+  console.log("Sharing failed with message: " + msg);
+}
 
 
 
