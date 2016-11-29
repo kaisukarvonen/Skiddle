@@ -18,6 +18,19 @@ body.inverse .card .form-control {
   color: initial;
 }
 
+.footer {
+  margin:2px 0 4px 0;
+}
+
+.footer-bottom {
+  /*margin:8px 0 19px 0; */
+
+  bottom:12px;
+  text-align:center;
+  left:0;
+  right:0;
+}
+
 .life-of-material-kit {
   background: #FFFFFF;
 }
@@ -27,7 +40,13 @@ body.inverse .card .form-control {
 	color:#5AA892;
 }
 
-body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+.green-link-sm, .green-link-sm:hover, a.green-link-sm:focus {
+	font-size:17px;
+	color:#5AA892;
+}
+
+
+body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   font-size:19px;
@@ -36,6 +55,10 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
 
 .settings-content {
 	line-height:2.6em;
+}
+
+ul {
+	list-style-type: none;
 }
 
 #log-out {
@@ -52,10 +75,15 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
 	color:#777;
 }
 
+.vertical-align-middle { 
+    vertical-align: middle; 
+}
+
+
 p.header-title {
 	text-align:center;
 	display:inline-block;
-	margin-left:26%;
+	margin-left:23%;
 	font-size:20px;
 }
 
@@ -64,10 +92,33 @@ a, a:hover, a:focus {
   text-decoration: none;
 }
 
-a.nav-icon-link, a.nav-icon-link:active {
+a.nav-icon-link-profile, a.nav-icon-link-profile:active {
+  color: #eee;
+  display:inline;
+  vertical-align: middle; 
+}
+
+a.nav-icon-link-home, a.nav-icon-link-home:active {
+  color: #eee;
+  display:inline;
+  float:left;
+}
+
+a.nav-icon-link-info, a.nav-icon-link-info:active {
   color: #eee;
   display:inline;
 }
+
+#explained-words {
+	margin:20px 0 0 0;
+}
+
+#skipped-words {
+	margin:25px 0 0 0;
+}
+
+
+
 
 .profile-picture-circle {
 	height:200px;
@@ -109,6 +160,7 @@ a.white-link, a.white-link:active {
 
 a.icon-header-right, a.icon-header-right:active {
   color: #eee;
+  display:inline-block;
   float:right;
 }
 
@@ -187,9 +239,9 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .btn,
 .navbar .navbar-nav > li > a.btn {
   border: none;
-  border-radius: 3px;
+  border-radius: 30px;
   position: relative;
-  padding: 12px 30px;
+  padding: 10px 30px;
   margin: 10px 1px;
   font-size: 19px;
   font-weight: 400;
@@ -2020,9 +2072,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   padding: 20px 0 50px 0px;
 }
 
-footer {
-  padding: 15px 0;
-}
+
 footer ul {
   margin-bottom: 0;
   padding: 0;
@@ -2708,8 +2758,9 @@ h5, .h5 {
 }
 
 h6, .h6 {
-  font-size: 1em;
-  text-transform: uppercase;
+  font-size: 21px;
+  font-weight:400;
+  color:#5AA892;
 }
 
 .title,
@@ -2928,7 +2979,7 @@ h2.title {
   margin-top: 100%;
 }
 .card .card-content {
-  position: absolute;
+  
   top: 0;
   bottom: 0;
   left: 0;
@@ -3784,7 +3835,8 @@ h2.title {
 }
 
 .signup-page .wrapper .card-signup3 {
-  margin: 70px 0 5px;
+  margin: 70px 0 0 0;
+  min-height:410px;
 }
 
 

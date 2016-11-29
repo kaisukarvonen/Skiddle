@@ -3,9 +3,6 @@ $(function() {
 	
 	if($('body').is('.index')) {
 		navigator.geolocation.getCurrentPosition(onLocationSuccess, onLocationError);
-		/* based on country code check if there is file named /location-countrycode-words.txt
-		-> if not: disable checkbox location-words
-		*/
 
 	}
 });
@@ -26,17 +23,20 @@ $(function() {
 		resetTimer();
 		
 		if (countryIsValid == 'true') {
-				console.log(localStorage.getItem('countryIsValid'));
-				
+				console.log(localStorage.getItem('countryIsValid'));	
 		} else {
 			console.log(localStorage.getItem('countryIsValid'));
 			$("#location-words").prop('disabled', true);
 		}
-		
-		if (window.user == 'null') {
-			$(".nav-icon-link").css('display', 'none');
-		}
-		console.log("current user:"+window.user+"fff");
+		console.log("webuser:"+window.user);
+	}
+});
+
+$(function() {
+	if (window.user == 'null') {
+		$(".nav-icon-link-profile").css('display', 'none');
+	} else {
+		$(".nav-icon-link-home").css('display', 'none');
 	}
 });
 
@@ -58,13 +58,24 @@ $(function() {
 	});
 	
 	
-	//for testing
+	/*for testing
 	$(".emptyWordsList").click(function() {
-		allWords = [];
-		localStorage.setItem("allWords", JSON.stringify(allWords));
-	});
+		emptyArray(allWords, "allWords");
+	});*/
+	
+	if (allWords.length == 60) {
+		emptyArray(allWords, "allWords");
+	}
 });
 
+
+
+
+$(function() {
+	$("#back-to-previous").click(function() {
+		window.history.back();
+	});
+});
 
 function listWordsOnPage(array, element) {
 	for (var i=0; i < array.length; i++) {
@@ -77,20 +88,32 @@ $(function() {
 		resetTimer();
 		listWordsOnPage(roundDoneWords, '#list-done-words');
 		listWordsOnPage(roundSkippedWords, '#list-skipped-words');
+		addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
 	}
 	
-	$('.play-again').click(function() {
+	$('#play-again').click(function() {
 		emptyArray(roundDoneWords, 'roundDoneWords');
 		emptyArray(roundSkippedWords, 'roundSkippedWords');
 		window.location = "playpage.html";
 	});
+	
+	
 });
 
+
+function addRoundWordstoDatabase(arrayDone, arraySkipped) {
+	$.post("http://scoctail.com/addwords.php", {
+			doneWords: arrayDone.length,
+			skippedWords: arraySkipped.length
+			}, function (data) {
+				console.log(data);
+			}
+	);
+}
 
 
 $(function() {
 	if($('body').is('.profile')) {
-		
 		showProfilePicture(window.user);
 	}
 });
@@ -339,14 +362,13 @@ var allWords = JSON.parse(localStorage.getItem('allWords')) || [];
 var gamemodes = JSON.parse(localStorage.getItem('gamemodes')) || [];
 var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
 var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
+var locationWords = JSON.parse(localStorage.getItem('locationWords')) || [];
 
 $(function() {
     $("#handle-settings").click(function() {
 		gamemodes = [];
 		emptyArray(roundDoneWords, 'roundDoneWords');
 		emptyArray(roundSkippedWords, 'roundSkippedWords');
-		
-		//allWords is emptied when app is closed? 
 		
 		if ($('#explain-words').is(':checked')) {
 			gamemodes.push("explain");
@@ -379,13 +401,18 @@ function emptyArray(array, element) {
 function wordFromFile(fileName) {
 	return $.get(fileName).then(function(data) {
 		var lines = data.split("\n");
-		var randomIndex = Math.floor(Math.random() * lines.length);
+		var randomIndex = Math.floor(Math.random() * (lines.length-1));
 		var word = lines[randomIndex];
+		console.log(randomIndex);
 		window.chosenWord = word;
-		if (wordIsUsed(word)) {
-			wordFromFile(fileName);
+		while (wordIsUsed(chosenWord)) {
+			console.log(chosenWord + " has already been used");
+			randomIndex = Math.floor(Math.random() * (lines.length-1));
+			word = lines[randomIndex];
+			console.log(randomIndex);
+			window.chosenWord = word;
 		}
-		return word;
+		return chosenWord;
 	});
 }
 
@@ -401,11 +428,16 @@ function wordIsUsed(word) {
 	} else {
 		for (i=0; i < allWordsList.length; i++) {
 			if (word == allWordsList[i]) {
-				return true;
+				isUsed = true;
+				break;
 			}
 		}
 	}
-	return false;
+	if (isUsed) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 var chosenWord; //nollaantuu aina kun uusi sivu ladataan
@@ -432,7 +464,7 @@ function setRandomWord() {
 
 function appendWord(word) {
 	$('.word').text(word);
-	saveWordToAllWordsList(window.chosenWord);
+	saveWordToAllWordsList(word);
 }
 
 
@@ -471,6 +503,9 @@ function startTimer(duration, display) {
 
         display.textContent = minutes + ":" + seconds; 
 		localStorage.setItem('countdownTime', parseInt(diff));
+		if (diff <= 5) {
+			$("#remaining-time").css("color", "red");
+		}
 
         if (diff <= 0) {
             start = Date.now() + 1000;
@@ -490,7 +525,7 @@ var countdownTime = parseInt(localStorage.getItem('countdownTime'));
 
 function vibrateTimeIsRunningOut() {
 	if (parseInt(localStorage.getItem('countdownTime')) == 5) {
-		navigator.vibrate(2000);
+		navigator.vibrate(1000);
 	} 
 }
 

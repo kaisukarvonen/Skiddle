@@ -35,9 +35,10 @@
     <nav class="navbar navbar-absolute">
     	<div class="container">
 			
-			<a href="index.html" class="nav-icon-link"><i class="material-icons">person</i></a>
+			<a href="index.html" class="nav-icon-link-home"><i class="material-icons">home</i></a>
+			<a href="profile.html" class="nav-icon-link-profile"><i class="material-icons">person</i></a>
 			<p class="header-title">Mobile App</p>
-			<a href="index.html" class="icon-header-right"><i class="material-icons">settings</i></a>
+			<a href="settings.html" class="icon-header-right"><i class="material-icons">settings</i></a>
         	
     	</div>
     </nav>
@@ -52,28 +53,27 @@
 		<div class="card card-signup3"> <!-- .signup-page .wrapper .card-signup -divillä boxin sijaintia y-akselilla -->
 		
 			<form class="form" method="" action="">
-					<div class="content">
+				<div class="content">
 					
-					<center><h3>Game over!</h3></center><br>
-					<a href="index.html">to mainpage</a>
-					<h5>Explained / mimicked words</h5>
+					<center><h3>Game over!</h3></center>
+					
+					<div id="explained-words">
+					<h6>Explained or mimicked words</h6>
 					<ul>
 						<div id="list-done-words"></div>
-					</ul>
-					<br>
-					<h5>Skipped words</h5>
+					</ul></div>
+					
+					<div id="skipped-words">
+					<h6>Skipped words</h6>
 					<ul>
 						<div id="list-skipped-words"></div>
-					</ul>
+					</ul></div>
 					
-					
-					</div>
-					
-					<div class="footer text-center">
-					<a class="btn btn-primary btn-raised"><div class="play-again">Play again!</div></a>
-					<a href="game-menu.html" class="btn btn-primary btn-raised">Change settings</a>
-					</div>					
-					<!-- if none is chosen, popup error -->
+					<div class="footer-bottom">
+					<input type="button" class="btn btn-primary btn-raised" id="play-again" value="Play again!"></input><br>
+					<a class="green-link-sm" href="game-menu.html">Change game settings</a>
+					</div>		
+				</div>
 			</form>
 			
 			</div>
