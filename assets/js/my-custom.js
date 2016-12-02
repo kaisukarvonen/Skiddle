@@ -88,7 +88,10 @@ $(function() {
 		resetTimer();
 		listWordsOnPage(roundDoneWords, '#list-done-words');
 		listWordsOnPage(roundSkippedWords, '#list-skipped-words');
+		
+		if (window.user != 'null') {
 		addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
+		}
 	}
 	
 	$('#play-again').click(function() {
@@ -104,7 +107,8 @@ $(function() {
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 	$.post("http://scoctail.com/addwords.php", {
 			doneWords: arrayDone.length,
-			skippedWords: arraySkipped.length
+			skippedWords: arraySkipped.length,
+			username1: window.user
 			}, function (data) {
 				console.log(data);
 			}
@@ -370,18 +374,30 @@ $(function() {
 		emptyArray(roundDoneWords, 'roundDoneWords');
 		emptyArray(roundSkippedWords, 'roundSkippedWords');
 		
-		if ($('#explain-words').is(':checked')) {
+	if ($('#explain-words').is(':checked')) {
 			gamemodes.push("explain");
-		}
-		if  ($('#mime-words').is(':checked')) {
+	}
+	if  ($('#mime-words').is(':checked')) {
 			gamemodes.push("mime");
-		}
-		if  ($('#location-words').is(':checked')) {
+	}
+	if  ($('#location-words').is(':checked')) {
 			gamemodes.push("locationwords");
-		}
-		
+	}
+	
+	if (gamemodes.length == 0) {
+		$(".modal-title").text("No game mode chosen");
+			$(".modal-title").css("color", "red");
+			$(".modal-body").text("Please choose at least one game mode!");
+			$("#myModal").modal({show: true});
+	} else if (gamemodes.length == 1 && gamemodes[0] == 'locationwords') {
+		$(".modal-title").text("Only location word mode chosen");
+			$(".modal-title").css("color", "red");
+			$(".modal-body").text("This location might not have many location specific words, please also choose a second mode for the game!");
+			$("#myModal").modal({show: true});
+	} else {
 		localStorage.setItem("gamemodes", JSON.stringify(gamemodes));
 		window.location = "playpage.html";
+	}
 	});
 });
 
@@ -428,16 +444,11 @@ function wordIsUsed(word) {
 	} else {
 		for (i=0; i < allWordsList.length; i++) {
 			if (word == allWordsList[i]) {
-				isUsed = true;
-				break;
+				return true;
 			}
 		}
 	}
-	if (isUsed) {
-		return true;
-	} else {
-		return false;
-	}
+	return false;
 }
 
 var chosenWord; //nollaantuu aina kun uusi sivu ladataan
@@ -489,7 +500,7 @@ function saveWordToAllWordsList(word) {
 
 
 function startTimer(duration, display) {
-    var start = Date.now(), //milliseconds
+    var start = Date.now(), 
         diff,
         minutes,
         seconds;
@@ -575,6 +586,19 @@ function getCountrycode(lat, lng) {
 
 
 
+
+function onBackKeyDown() {
+	if($('body').is('.playpage')) {
+		alert("ho"); //alert stops timer, modal doesn't..
+		$(".modal-title").text("Paused");
+		/*$(".modal-title").css("color", "red");*/
+		/*$(".modal-body").text("Username and password do not match!");*/
+		$("#myModal").modal({show: true});
+	}
+}
+
+
+
 var pictureSource;  
 var destinationType; 
 
@@ -583,6 +607,7 @@ document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady() {
     pictureSource=navigator.camera.PictureSourceType;
     destinationType=navigator.camera.DestinationType;
+	document.addEventListener("backbutton", onBackKeyDown, false);
 }
 
 
