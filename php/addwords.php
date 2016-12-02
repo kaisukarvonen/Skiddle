@@ -10,7 +10,7 @@ $skippedwords = $_POST['skippedwords'];
 $username = $_POST['username1'];
 
 try {
-   $connection = new PDO("mysql:host=$servername;dbname=scocta5_database1", $dbusername, $dbpassword);
+   $connection = new PDO("mysql:host=$servername;dbname=x", $dbusername, $dbpassword);
    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
    
    $stmt= $connection->prepare('UPDATE webuser SET done_words= done_words + :donewords, skipped_words= skipped_words + :skippedwords  WHERE username= :username');
