@@ -3,6 +3,10 @@ $(function() {
 	
 	if($('body').is('.index')) {
 		navigator.geolocation.getCurrentPosition(onLocationSuccess, onLocationError);
+		
+		if (window.user != 'null') {
+			window.location = "game-menu.html";
+		}
 
 	}
 });
@@ -504,12 +508,12 @@ function setRandomWord() {
 	}
 }
 
-$(function() {
-	function appendWord(word) {
+
+function appendWord(word) {
 		$('.current-word').text(word);
 		saveWordToAllWordsList(word);
-	}
-});
+}
+
 
 
 
