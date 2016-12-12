@@ -12,14 +12,31 @@ $(function() {
 	
 	if($('body').is('.game-menu')) {
 		
-		$('#time-slider').noUiSlider({
-			start: 90,
-			connect: "lower",
-			range: {
-				min: 60,
-				max: 300
+		var $element = $("#rangeslider");
+		$element.rangeslider({
+			polyfill: false,
+
+			rangeClass: 'rangeslider',
+			disabledClass: 'rangeslider--disabled',
+			horizontalClass: 'rangeslider--horizontal',
+			verticalClass: 'rangeslider--vertical',
+			fillClass: 'rangeslider__fill',
+			handleClass: 'rangeslider__handle',
+
+			onInit: function() {
+				valueOutput(this.$element[0]);
 			}
 		});
+		function valueOutput(element) {
+			var value = element.value;
+			$("#time-value").text(value + " seconds");
+		}
+		
+		$(document).on('input', 'input[type="range"]', function(e) {
+            valueOutput(e.target);
+        });
+		
+		
 		resetTimer();
 		
 		if (countryIsValid == 'true') {
@@ -49,7 +66,7 @@ $(function() {
 
 
 	$(".word-is-done").click(function() {
-		saveDoneWordtoList(window.chosenWord);
+		saveDonesaveDoneWordtoList(window.chosenWord);
 	});
 
 
@@ -57,11 +74,6 @@ $(function() {
 		saveSkippedWordtoList(window.chosenWord);
 	});
 	
-	
-	/*for testing
-	$(".emptyWordsList").click(function() {
-		emptyArray(allWords, "allWords");
-	});*/
 	
 	if (allWords.length == 60) {
 		emptyArray(allWords, "allWords");
@@ -77,20 +89,36 @@ $(function() {
 	});
 });
 
-function listWordsOnPage(array, element) {
-	for (var i=0; i < array.length; i++) {
-		$(element).append("<li><span>"+array[i]+"</span></li>");
+function listWordsOnPage(array, element, title) {
+	if (array.length == 0) {
+		$(title).css("display", "none");
+	} else {
+		for (var i=0; i < array.length; i++) {
+			$(element).append("<li><span>"+array[i]+"</span></li>");
+		}
 	}
 }
 
+function footerPosition(footer, array1, array2) {
+	var combinedLength = array1.length + array2.length;
+	if (array1.length > 6 && array2.length == 0 || array2.length > 6 && array1.length == 0 || array1.length > 0 && array2.length > 0 && combinedLength > 4) {
+		$(footer).css("position", "static");
+	}
+}
+
+
+
+
 $(function() {
 	if($('body').is('.gameover')) {
-		resetTimer();
-		listWordsOnPage(roundDoneWords, '#list-done-words');
-		listWordsOnPage(roundSkippedWords, '#list-skipped-words');
+		resetTimer(window.countdownTime);
+		
+		listWordsOnPage(roundDoneWords, '#list-done-words', '#explained-words');
+		listWordsOnPage(roundSkippedWords, '#list-skipped-words', '#skipped-words');
+		footerPosition(".footer-bottom", roundDoneWords, roundSkippedWords);
 		
 		if (window.user != 'null') {
-		addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
+			//addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
 		}
 	}
 	
@@ -373,6 +401,10 @@ $(function() {
 		gamemodes = [];
 		emptyArray(roundDoneWords, 'roundDoneWords');
 		emptyArray(roundSkippedWords, 'roundSkippedWords');
+	
+	var timeLimit = $("#rangeslider").val();
+	resetTimer(timeLimit);
+	
 		
 	if ($('#explain-words').is(':checked')) {
 			gamemodes.push("explain");
@@ -402,8 +434,8 @@ $(function() {
 });
 
 
-function resetTimer() {
-	countdownTime = 20;
+function resetTimer(time) {
+	window.countdownTime = time;
 	localStorage.setItem('countdownTime', parseInt(countdownTime));
 }
 
@@ -589,11 +621,26 @@ function getCountrycode(lat, lng) {
 
 function onBackKeyDown() {
 	if($('body').is('.playpage')) {
-		alert("ho"); //alert stops timer, modal doesn't..
-		$(".modal-title").text("Paused");
-		/*$(".modal-title").css("color", "red");*/
-		/*$(".modal-body").text("Username and password do not match!");*/
-		$("#myModal").modal({show: true});
+		exitConfirm();
+	} else {
+		window.history.back();
+	}
+}
+
+
+function exitConfirm() {
+	var title = "GAME PAUSED";
+	var message = "Do you want to exit?";
+	var labels = "RESUME, EXIT";
+	
+	navigator.notification.confirm(message, confirmCallback, title, labels);
+	
+	function confirmCallback(buttonIndex) {
+		if (buttonIndex == 2) {
+			emptyArray(roundDoneWords, 'roundDoneWords');
+			emptyArray(roundSkippedWords, 'roundSkippedWords');
+			window.location = "game-menu.html";
+		}
 	}
 }
 
@@ -608,6 +655,7 @@ function onDeviceReady() {
     pictureSource=navigator.camera.PictureSourceType;
     destinationType=navigator.camera.DestinationType;
 	document.addEventListener("backbutton", onBackKeyDown, false);
+	
 }
 
 
@@ -652,5 +700,5 @@ function getPhoto(source) {
 
 
     function onFail(message) {
-      alert('Failed because: ' + message);
+      console.log('Failed because: ' + message);
     }
