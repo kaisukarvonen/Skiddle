@@ -504,10 +504,12 @@ function setRandomWord() {
 	}
 }
 
-function appendWord(word) {
-	$('.current-word').text(word);
-	saveWordToAllWordsList(word);
-}
+$(function() {
+	function appendWord(word) {
+		$('.current-word').text(word);
+		saveWordToAllWordsList(word);
+	}
+});
 
 
 
