@@ -10,7 +10,7 @@
 	<preference name="phonegap-version" value="cli-6.3.0" />
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-minSdkVersion" value="18" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -33,7 +33,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-x-socialsharing" source="npm" />
 	
-	<preference name="SplashScreen" value="wallpaper"/>
+		<preference name="SplashScreen" value="wallpaper"/>
 		<preference name="AutoHideSplashScreen" value="false" />
 		<preference name="SplashScreenDelay" value="3000" />
 		<preference name="SplashMaintainAspectRatio" value="true" />
@@ -128,7 +128,7 @@
     </platform>
 	
 	<access origin="*"/>
-	<allow-intent href="*" />
+	<allow-intent href="hhtp://*/*" />
 	<allow-navigation href="*" />
 
 </widget>
