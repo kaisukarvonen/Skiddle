@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Hello World</name>
+<widget id="com.scoctail.skiddle" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Skiddle</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Mobile game where you explain and mimic words to your friends and they try to guess them
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="prosp33r@gmail.com" href="http://phonegap.com">
+        Kaisu Karvonen
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
