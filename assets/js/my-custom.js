@@ -72,7 +72,7 @@ $(function() {
 	});
 	
 	
-	if (allWords.length == 60) {
+	if (allWords.length > 60) {
 		emptyArray(allWords, "allWords");
 	}
 });
@@ -109,7 +109,7 @@ function footerPosition(footer, array1, array2) {
 $(function() {
 	if($('body').is('.gameover')) {
 		resetTimer(parseInt(localStorage.getItem("timeLimit")));
-		
+		console.log(allWords.length);
 		listWordsOnPage(roundDoneWords, '#list-done-words', '#explained-words');
 		listWordsOnPage(roundSkippedWords, '#list-skipped-words', '#skipped-words');
 		footerPosition(".footer-bottom", roundDoneWords, roundSkippedWords);
@@ -505,7 +505,7 @@ function setRandomWord() {
 }
 
 function appendWord(word) {
-	$('.word').text(word);
+	$('.current-word').text(word);
 	saveWordToAllWordsList(word);
 }
 
