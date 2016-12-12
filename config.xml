@@ -35,7 +35,7 @@
 		<preference name="AutoHideSplashScreen" value="false" />
 		<preference name="SplashScreenDelay" value="3000" />
 		<preference name="SplashMaintainAspectRatio" value="true" />
-		<preference name="SplashShowOnlyFirstTime" value="true" />
+		<preference name="SplashShowOnlyFirstTime" value="false" />
     <platform name="android">
         <icon density="ldpi" src="res/icon/android/wallpaper.png" />
         <icon density="mdpi" src="res/icon/android/wallpaper.png" />
@@ -124,4 +124,6 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+	
+	<access origin="*"/>
 </widget>

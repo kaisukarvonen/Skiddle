@@ -483,7 +483,7 @@ function wordIsUsed(word) {
 	return false;
 }
 
-var chosenWord; //nollaantuu aina kun uusi sivu ladataan
+var chosenWord;
 
 function setRandomWord() {
 	var randomMode = gamemodes[Math.floor(Math.random() * gamemodes.length)];
@@ -555,7 +555,7 @@ function startTimer(duration, display) {
         }
 		vibrateTimeIsRunningOut();
     };
-    // we don't want to wait a full second before the timer starts
+   
     timer();
     setInterval(timer, 1000);
 	
@@ -661,7 +661,7 @@ function onDeviceReady() {
 
 function capturePhoto() {
  navigator.camera.getPicture(uploadPhoto, function(message) {
- alert('get picture failed');
+ console.log('get picture failed');
  }, {
  quality: 100,
  destinationType: navigator.camera.DestinationType.FILE_URI,
