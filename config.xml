@@ -7,7 +7,7 @@
     <author email="prosp33r@gmail.com" href="http://phonegap.com">
         Kaisu Karvonen
     </author>
-	<preference name="phonegap-version" value="cli-6.3.0" />
+	
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
