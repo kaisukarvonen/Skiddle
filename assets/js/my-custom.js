@@ -320,7 +320,7 @@ $(function() {
 	}
 	
 	$("#shareWhatsapp").click(function() {
-		var text = "I'm playing MobileGame and you should too!";
+		var text = "I'm playing Skiddle and you should too!";
 		var url = "http://someurl.com";
 		window.plugins.socialsharing.shareViaWhatsApp(text, null /* img */, url, function() {
 			console.log('whatsappshare ok');
@@ -330,7 +330,7 @@ $(function() {
 	});
 	
 	$("#shareTwitter").click(function() {
-		var text = "I'm playing MobileGame and you should too!";
+		var text = "I'm playing Skiddle and you should too!";
 		var url = "http://someurl.com";
 		window.plugins.socialsharing.shareViaTwitter(text, null /* img */, url, function() {
 			console.log('twittershare ok');
@@ -342,14 +342,14 @@ $(function() {
 	
 	$("#shareEmail").click(function() {
 		window.plugins.socialsharing.shareViaEmail(
-			  "I'm playing MobileGame and you should too!", // can contain HTML tags, but support on Android is rather limited:  http://stackoverflow.com/questions/15136480/how-to-send-html-content-with-image-through-android-default-email-client 
-			  "Invitation for MobileGame App",
-			  ['to@person1.com'], // TO: must be null or an array 
-			  null, // CC: must be null or an array 
-			  null, // BCC: must be null or an array 
-			  ['https://www.google.nl/images/srpr/logo4w.png','www/localimage.png'], // FILES: can be null, a string, or an array 
-			  onSuccess, // called when sharing worked, but also when the user cancelled sharing via email. On iOS, the callbacks' boolean result parameter is true when sharing worked, false if cancelled. On Android, this parameter is always true so it can't be used). See section "Notes about the successCallback" below. 
-			  onError // called when sh*t hits the fan 
+			  "I'm playing Skiddle and you should too!", 
+			  "Invitation for Skiddle Mobile App",
+			  null,
+			  null, 
+			  null, 
+			  null,  
+			  onSuccess, 
+			  onError
 		);
 	});
 	
