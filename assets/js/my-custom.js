@@ -622,8 +622,6 @@ function getCountrycode(lat, lng) {
 }
 
 
-
-
 function onBackKeyDown() {
 	if($('body').is('.playpage')) {
 		exitConfirm();
