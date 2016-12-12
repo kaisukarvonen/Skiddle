@@ -153,10 +153,25 @@ a.white-link, a.white-link:active {
 }
 
 .current-word {
-	padding:16px 0 62px 0;
-	font-size:27px;
+	padding:16px 0 0 0;
+	font-size:32px;
 	text-transform: uppercase;
 	color:#5AA892;
+}
+
+
+
+.word-is-done {
+	margin-top:85px;
+	float:left;
+	margin-left:25px;
+}
+
+
+.skip-word {
+	margin-top:85px;
+	float:right;
+	margin-right:25px;
 }
 
 
@@ -188,16 +203,6 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 	font-size: 36px;
 }
 
-.word-is-done {
-	float:left;
-	margin-left:25px;
-}
-
-
-.skip-word {
-	float:right;
-	margin-right:25px;
-}
 
 
 #remaining-time {
@@ -3843,6 +3848,7 @@ h2.title {
 
 .signup-page .wrapper .card-signup2 {
   margin: 22px 0 5px;
+  min-height:470px;
 }
 
 .signup-page .wrapper .card-signup3 {
