@@ -36,9 +36,6 @@ $(function() {
             valueOutput(e.target);
         });
 		
-		
-		resetTimer();
-		
 		if (countryIsValid == 'true') {
 				console.log(localStorage.getItem('countryIsValid'));	
 		} else {
@@ -66,7 +63,7 @@ $(function() {
 
 
 	$(".word-is-done").click(function() {
-		saveDonesaveDoneWordtoList(window.chosenWord);
+		saveDoneWordtoList(window.chosenWord);
 	});
 
 
@@ -111,12 +108,12 @@ function footerPosition(footer, array1, array2) {
 
 $(function() {
 	if($('body').is('.gameover')) {
-		resetTimer(window.countdownTime);
+		resetTimer(parseInt(localStorage.getItem("timeLimit")));
 		
 		listWordsOnPage(roundDoneWords, '#list-done-words', '#explained-words');
 		listWordsOnPage(roundSkippedWords, '#list-skipped-words', '#skipped-words');
 		footerPosition(".footer-bottom", roundDoneWords, roundSkippedWords);
-		
+		console.log(roundDoneWords + " -- "+ roundSkippedWords);
 		if (window.user != 'null') {
 			//addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
 		}
@@ -395,6 +392,7 @@ var gamemodes = JSON.parse(localStorage.getItem('gamemodes')) || [];
 var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
 var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
 var locationWords = JSON.parse(localStorage.getItem('locationWords')) || [];
+var timeLimit = parseInt(localStorage.getItem('timeLimit'));
 
 $(function() {
     $("#handle-settings").click(function() {
@@ -402,8 +400,9 @@ $(function() {
 		emptyArray(roundDoneWords, 'roundDoneWords');
 		emptyArray(roundSkippedWords, 'roundSkippedWords');
 	
-	var timeLimit = $("#rangeslider").val();
-	resetTimer(timeLimit);
+	var limit = $("#rangeslider").val();
+	localStorage.setItem("timeLimit", parseInt(limit));
+	resetTimer(limit);
 	
 		
 	if ($('#explain-words').is(':checked')) {
