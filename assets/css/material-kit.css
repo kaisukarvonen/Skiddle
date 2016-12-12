@@ -3856,6 +3856,11 @@ h2.title {
   min-height:410px;
 }
 
+.signup-page .wrapper .card-signup4 {
+  margin: 22px 0 5px;
+  min-height:390px;
+}
+
 
 .landing-page .navbar-transparent,
 .profile-page .navbar-transparent,

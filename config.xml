@@ -119,11 +119,7 @@
 </platform>
     </platform>
    
-    <platform name="android">
-	<access origin="*"/>
-	<allow-intent href="*" />
-	<allow-navigation href="*" />
-    </platform>
+
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
