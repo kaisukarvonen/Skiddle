@@ -456,6 +456,7 @@ function wordFromFile(fileName) {
 		var randomIndex = Math.floor(Math.random() * (lines.length-1));
 		var word = lines[randomIndex];
 		console.log(randomIndex);
+		alert("-"+word+"-");
 		while (wordIsUsed(word)) {
 			console.log(word + " has already been used");
 			randomIndex = Math.floor(Math.random() * (lines.length-1));
