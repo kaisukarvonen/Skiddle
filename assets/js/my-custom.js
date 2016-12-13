@@ -477,7 +477,7 @@ function wordIsUsed(word) {
 	if (allWordsList.length == 0) {
 		return false;
 	} else {
-		for (i=0; i < allWordsList.length-1; i++) {
+		for (i=0; i < allWordsList.length; i++) {
 			if (word == allWordsList[i]) {
 				return true;
 			}
