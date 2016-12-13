@@ -462,7 +462,7 @@ function wordFromFile(fileName) {
 			word = lines[randomIndex];
 		}
 		chosenWord = word;
-		return chosenWord; //loop ongelmana, toimii kun ottaa loopin pois
+		return chosenWord;
 	});
 }
 
