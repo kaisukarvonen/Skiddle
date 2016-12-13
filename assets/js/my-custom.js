@@ -463,6 +463,7 @@ function wordFromFile(fileName) {
 			console.log(randomIndex);
 		}
 		chosenWord = word;
+		alert("-"+chosenWord+"-");
 		return chosenWord; //loop ongelmana, toimii kun ottaa loopin pois
 	});
 }
