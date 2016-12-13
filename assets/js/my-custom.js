@@ -1,4 +1,5 @@
 
+
 $(function() {
 	
 	if($('body').is('.index')) {
@@ -499,8 +500,7 @@ function setRandomWord() {
 	}
 	
 	if (randomMode == "explain") {
-		return wordFromFile("http://scoctail.com/english-explain-words.txt").then(
-			rd);
+		return wordFromFile("http://scoctail.com/english-explain-words.txt").then(appendWord);
 	} else if (randomMode == "mime") {
 		return wordFromFile("http://scoctail.com/english-mime-words.txt").then(appendWord);
 	} else if (randomMode == "locationwords") {
