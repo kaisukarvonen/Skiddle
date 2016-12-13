@@ -499,7 +499,8 @@ function setRandomWord() {
 	}
 	
 	if (randomMode == "explain") {
-		return wordFromFile("http://scoctail.com/english-explain-words.txt").then(appendWord);
+		return wordFromFile("http://scoctail.com/english-explain-words.txt").then(
+			rd);
 	} else if (randomMode == "mime") {
 		return wordFromFile("http://scoctail.com/english-mime-words.txt").then(appendWord);
 	} else if (randomMode == "locationwords") {
@@ -510,7 +511,7 @@ function setRandomWord() {
 
 function appendWord(word) {
 		$('.current-word').text(word);
-		saveWordToAllWordsList(word);
+		saveWordToAllWordsList("testisana");
 }
 
 
