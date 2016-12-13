@@ -456,23 +456,15 @@ function wordFromFile(fileName) {
 		var randomIndex = Math.floor(Math.random() * (lines.length-1));
 		var word = lines[randomIndex];
 		console.log(randomIndex);
-<<<<<<< HEAD
 		//alert("-"+word+"-"); //tämä toimii, alert loopin jälkeen ei
-		while (wordIsUsed(word) == true) {
-=======
-		alert("-"+word+"-");
-		while (wordIsUsed(word)) {
->>>>>>> origin/master
-			console.log(word + " has already been used");
-			randomIndex = Math.floor(Math.random() * (lines.length-1));
-			word = lines[randomIndex];
+		if (wordIsUsed(word) == true) {
+			do {
+				console.log(word + " has already been used");
+				randomIndex = Math.floor(Math.random() * (lines.length-1));
+				word = lines[randomIndex];
+			} while (wordIsUsed(word) == true);
 		}
 		chosenWord = word;
-<<<<<<< HEAD
-		//alert("-"+chosenWord+"-");
-=======
-		alert("-"+chosenWord+"-");
->>>>>>> origin/master
 		return chosenWord; //loop ongelmana, toimii kun ottaa loopin pois
 	});
 }
