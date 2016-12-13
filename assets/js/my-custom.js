@@ -511,7 +511,7 @@ function setRandomWord() {
 
 function appendWord(word) {
 		$('.current-word').text(word);
-		saveWordToAllWordsList("testisana");
+		saveWordToAllWordsList(word);
 }
 
 
