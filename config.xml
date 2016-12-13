@@ -40,4 +40,8 @@
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-x-socialsharing" source="npm" />
 	
+	<gap:config-file platform="android" parent="/manifest">
+	     <application android:debuggable="true" />
+	</gap:config-file>
+	
 </widget>
