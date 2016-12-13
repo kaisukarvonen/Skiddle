@@ -473,12 +473,11 @@ function wordFromFile(fileName) {
 
 
 function wordIsUsed(word) {
-	var allWordsList = JSON.parse(localStorage.getItem("allWords"));
-	if (allWordsList.length == 0) {
+	if (allWords.length == 0) {
 		return false;
 	} else {
-		for (i=0; i < allWordsList.length; i++) {
-			if (word == allWordsList[i]) {
+		for (i=0; i < allWords.length; i++) {
+			if (word == allWords[i]) {
 				return true;
 			}
 		}
