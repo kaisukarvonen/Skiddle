@@ -456,11 +456,11 @@ function wordFromFile(fileName) {
 		var randomIndex = Math.floor(Math.random() * (lines.length-1));
 		var word = lines[randomIndex];
 		console.log(randomIndex);
-		do {
+		while (wordIsUsed(word)) {
 			console.log(word + " has already been used");
 			randomIndex = Math.floor(Math.random() * (lines.length-1));
 			word = lines[randomIndex];
-		} while (wordIsUsed(word));
+		}
 		chosenWord = word;
 		return chosenWord; //loop ongelmana, toimii kun ottaa loopin pois
 	});
