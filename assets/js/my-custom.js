@@ -508,10 +508,6 @@ function setRandomWord() {
 
 
 function appendWord(chosenWord) {
-<<<<<<< HEAD
-=======
-	
->>>>>>> origin/master
 	$('.current-word').text(chosenWord);
 	saveWordToAllWordsList(chosenWord);
 }
