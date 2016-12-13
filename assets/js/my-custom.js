@@ -122,7 +122,6 @@ $(function() {
 		if (window.user != 'null') {
 			//addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
 		}
-		alert(allWords);
 	}
 	
 	$('#play-again').click(function() {
@@ -510,6 +509,7 @@ function setRandomWord() {
 
 
 function appendWord(word) {
+	alert("x");
 		$('.current-word').text(word);
 		saveWordToAllWordsList(word);
 }
