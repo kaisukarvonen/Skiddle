@@ -456,13 +456,14 @@ function wordFromFile(fileName) {
 		var randomIndex = Math.floor(Math.random() * (lines.length-1));
 		var word = lines[randomIndex];
 		console.log(randomIndex);
-		while (wordIsUsed(word)) {
+		//alert("-"+word+"-"); //tämä toimii, alert loopin jälkeen ei
+		while (wordIsUsed(word) == true) {
 			console.log(word + " has already been used");
 			randomIndex = Math.floor(Math.random() * (lines.length-1));
 			word = lines[randomIndex];
-			console.log(randomIndex);
 		}
 		chosenWord = word;
+		//alert("-"+chosenWord+"-");
 		return chosenWord; //loop ongelmana, toimii kun ottaa loopin pois
 	});
 }
@@ -475,7 +476,7 @@ function wordIsUsed(word) {
 	if (allWordsList.length == 0) {
 		return false;
 	} else {
-		for (i=0; i < allWordsList.length; i++) {
+		for (i=0; i < allWordsList.length-1; i++) {
 			if (word == allWordsList[i]) {
 				return true;
 			}
