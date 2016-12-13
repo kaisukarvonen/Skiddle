@@ -456,14 +456,14 @@ function wordFromFile(fileName) {
 		var randomIndex = Math.floor(Math.random() * (lines.length-1));
 		var word = lines[randomIndex];
 		console.log(randomIndex);
-		window.chosenWord = word;
-		/*while (wordIsUsed(window.chosenWord)) {
+		chosenWord = word;
+		while (wordIsUsed(chosenWord)) {
 			console.log(chosenWord + " has already been used");
 			randomIndex = Math.floor(Math.random() * (lines.length-1));
 			word = lines[randomIndex];
 			console.log(randomIndex);
-			window.chosenWord = word;
-		}*/
+			chosenWord = word;
+		}
 		return chosenWord;
 	});
 }
@@ -509,7 +509,7 @@ function setRandomWord() {
 
 
 function appendWord(chosenWord) {
-	//alert("x");
+	
 	$('.current-word').text(chosenWord);
 	saveWordToAllWordsList(chosenWord);
 }
