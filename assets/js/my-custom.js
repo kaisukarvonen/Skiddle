@@ -121,6 +121,7 @@ $(function() {
 		if (window.user != 'null') {
 			//addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
 		}
+		alert(allWords);
 	}
 	
 	$('#play-again').click(function() {
@@ -456,24 +457,22 @@ function wordFromFile(fileName) {
 		var word = lines[randomIndex];
 		console.log(randomIndex);
 		window.chosenWord = word;
-		while (wordIsUsed(chosenWord)) {
+		while (wordIsUsed(window.chosenWord)) {
 			console.log(chosenWord + " has already been used");
 			randomIndex = Math.floor(Math.random() * (lines.length-1));
 			word = lines[randomIndex];
 			console.log(randomIndex);
 			window.chosenWord = word;
 		}
-		return chosenWord;
+	return window.chosenWord;
 	});
 }
 
 
-//If you return a promise, the next 'then' in the chain will use the value that the promise resolves to.
 
 
 function wordIsUsed(word) {
 	var allWordsList = JSON.parse(localStorage.getItem("allWords"));
-	var isUsed = false;
 	if (allWordsList.length == 0) {
 		return false;
 	} else {
