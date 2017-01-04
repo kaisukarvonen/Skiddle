@@ -40,6 +40,26 @@ body.inverse .card .form-control {
   background: #FFFFFF;
 }
 
+#splashscreen {
+	height: 100%;
+    width: 100%;
+    z-index: 99;
+	position:absolute;
+	background-image:url("C:/Users/Kaisu/git/propsis/Mobile-wordgame/Mobile-wordgame/assets/img/splashscreen.jpg");
+	background-size: cover;
+	background-position: top center;
+}
+
+#loadscreen {
+	height: 100%;
+    width: 100%;
+    z-index: 99;
+	position:absolute;
+	background-image:url("C:/Users/Kaisu/git/propsis/Mobile-wordgame/Mobile-wordgame/assets/img/loadscreen.gif");
+	background-size: cover;
+	background-position: top center;
+}
+
 .green-link, .green-link:hover, a.green-link:focus {
 	font-size:19px;
 	color:#5AA892;
