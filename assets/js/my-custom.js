@@ -1,6 +1,6 @@
 
 
-$(function() {
+/*$(function() {
 	
 	if($('body').is('.index')) {
 		navigator.geolocation.getCurrentPosition(onLocationSuccess, onLocationError);
@@ -42,14 +42,14 @@ $(function() {
         });
 		
 		if (countryIsValid == 'true') {
-				console.log(localStorage.getItem('countryIsValid'));	
+				//console.log(localStorage.getItem('countryIsValid'));	
 		} else {
-			console.log(localStorage.getItem('countryIsValid'));
+			//console.log(localStorage.getItem('countryIsValid'));
 			$("#location-words").prop('disabled', true);
 		}
 		console.log("webuser:"+window.user);
 	}
-});
+});*/
 
 $(function() {
 	if (window.user == 'null') {
@@ -60,7 +60,7 @@ $(function() {
 });
 
 
-$(function() {
+/*$(function() {
 	if($('body').is('.playpage')) {
 		setRandomWord();
 		startTimer(window.countdownTime, document.querySelector('#remaining-time'));
@@ -80,7 +80,7 @@ $(function() {
 	if (allWords.length > 60) {
 		emptyArray(allWords, "allWords");
 	}
-});
+});*/
 
 
 
@@ -133,7 +133,7 @@ $(function() {
 	
 });
 
-
+/*
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 	$.post("http://scoctail.com/addwords.php", {
 			doneWords: arrayDone.length,
@@ -143,7 +143,7 @@ function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 				console.log(data);
 			}
 	);
-}
+}*/
 
 
 $(function() {
@@ -391,7 +391,7 @@ function logout(webuser) {
 
 
 
-
+/*
 var allWords = JSON.parse(localStorage.getItem('allWords')) || [];
 var gamemodes = JSON.parse(localStorage.getItem('gamemodes')) || [];
 var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
@@ -435,9 +435,9 @@ $(function() {
 		window.location = "playpage.html";
 	}
 	});
-});
+});*/
 
-
+/*
 function resetTimer(time) {
 	window.countdownTime = time;
 	localStorage.setItem('countdownTime', parseInt(countdownTime));
@@ -573,9 +573,9 @@ function vibrateTimeIsRunningOut() {
 	} 
 }
 
+*/
 
-
-var countrycode = localStorage.getItem('countrycode');
+/*var countrycode = localStorage.getItem('countrycode');
 
 var onLocationSuccess = function(position) {
         getCountrycode(position.coords.latitude, position.coords.longitude);
@@ -584,7 +584,7 @@ var onLocationSuccess = function(position) {
     // onError Callback receives a PositionError object
     //
 function onLocationError(error) {
-     alert('code: '    + error.code    + '\n' +
+     console.log('code: '    + error.code    + '\n' +
             'message: ' + error.message + '\n');
     }
 
@@ -615,7 +615,7 @@ function getCountrycode(lat, lng) {
 		});
 		
 	});
-}
+}*/
 
 
 function onBackKeyDown() {
