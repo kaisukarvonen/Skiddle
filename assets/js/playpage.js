@@ -1,17 +1,17 @@
 $(function() {
-	if (sessionStorage.getItem("currentPage") == "playpage") {
+	if($('body').is('.playpage')) {
 		setRandomWord();
-		startTimer(window.countdownTime, document.querySelector('#remaining-time'));
+		startTimer(parseInt(sessionStorage.getItem('countdownTime')), document.querySelector('#remaining-time'));
 	}
 
 
 	$(".word-is-done").click(function() {
-		saveDoneWordtoList(window.chosenWord);
+		saveDoneWordtoList(chosenWord);
 	});
 
 
 	$(".skip-word").click(function() {
-		saveSkippedWordtoList(window.chosenWord);
+		saveSkippedWordtoList(chosenWord);
 	});
 	
 	
@@ -22,12 +22,9 @@ $(function() {
 
 
 var allWords = JSON.parse(localStorage.getItem('allWords')) || [];
-var gamemodes = JSON.parse(localStorage.getItem('gamemodes')) || [];
+var gamemodes = JSON.parse(sessionStorage.getItem('gamemodes')) || [];
 var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
 var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
-var locationWords = JSON.parse(localStorage.getItem('locationWords')) || [];
-var timeLimit = parseInt(localStorage.getItem('timeLimit'));
-
 
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 	$.post("http://scoctail.com/addwords.php", {
@@ -79,6 +76,7 @@ function setRandomWord() {
 	var randomMode = gamemodes[Math.floor(Math.random() * gamemodes.length)];
 	console.log("random: "+randomMode+", modes:" +gamemodes);
 	console.log("allWords:" +JSON.parse(localStorage.getItem('allWords')));
+	var countrycode = sessionStorage.getItem("countrycode");
 	
 	if (randomMode == "explain" || randomMode == "locationwords") {
 		$('#word-title').append("<h3>Explain it!</h3>");
@@ -137,7 +135,7 @@ function startTimer(duration, display) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         display.textContent = minutes + ":" + seconds; 
-		localStorage.setItem('countdownTime', parseInt(diff));
+		sessionStorage.setItem('countdownTime', parseInt(diff));
 		if (diff <= 5) {
 			$("#remaining-time").css("color", "red");
 		}
@@ -152,14 +150,14 @@ function startTimer(duration, display) {
     setInterval(timer, 1000);
 	
 	window.setTimeout(function() {
-	window.location = "gameover.html"}, duration*1000);
+		window.location = "gameover.html"}, duration*1000);
 }
 
-var countdownTime = parseInt(localStorage.getItem('countdownTime'));
+var countdownTime = parseInt(sessionStorage.getItem('countdownTime'));
 
 
 function vibrateTimeIsRunningOut() {
-	if (parseInt(localStorage.getItem('countdownTime')) == 5) {
+	if (parseInt(sessionStorage.getItem('countdownTime')) == 5) {
 		navigator.vibrate(1000);
 	} 
 }

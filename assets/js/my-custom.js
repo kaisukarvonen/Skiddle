@@ -1,6 +1,6 @@
 
-
-/*$(function() {
+/*
+$(function() {
 	
 	if($('body').is('.index')) {
 		navigator.geolocation.getCurrentPosition(onLocationSuccess, onLocationError);
@@ -49,7 +49,7 @@ $(function() {
 		}
 		console.log("webuser:"+window.user);
 	}
-});*/
+});
 
 $(function() {
 	if (window.user == 'null') {
@@ -60,7 +60,7 @@ $(function() {
 });
 
 
-/*$(function() {
+$(function() {
 	if($('body').is('.playpage')) {
 		setRandomWord();
 		startTimer(window.countdownTime, document.querySelector('#remaining-time'));
@@ -80,7 +80,7 @@ $(function() {
 	if (allWords.length > 60) {
 		emptyArray(allWords, "allWords");
 	}
-});*/
+});
 
 
 
@@ -133,7 +133,7 @@ $(function() {
 	
 });
 
-/*
+
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 	$.post("http://scoctail.com/addwords.php", {
 			doneWords: arrayDone.length,
@@ -143,7 +143,7 @@ function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 				console.log(data);
 			}
 	);
-}*/
+}
 
 
 $(function() {
@@ -324,7 +324,7 @@ $(function() {
 	$("#shareWhatsapp").click(function() {
 		var text = "I'm playing Skiddle and you should too!";
 		var url = "http://someurl.com";
-		window.plugins.socialsharing.shareViaWhatsApp(text, null /* img */, url, function() {
+		window.plugins.socialsharing.shareViaWhatsApp(text, img , url, function() {
 			console.log('whatsappshare ok');
 		}, function(errormsg){
 			alert(errormsg);
@@ -334,7 +334,7 @@ $(function() {
 	$("#shareTwitter").click(function() {
 		var text = "I'm playing Skiddle and you should too!";
 		var url = "http://someurl.com";
-		window.plugins.socialsharing.shareViaTwitter(text, null /* img */, url, function() {
+		window.plugins.socialsharing.shareViaTwitter(text, null, url, function() {
 			console.log('twittershare ok');
 		}, function(errormsg){
 			alert(errormsg);
@@ -391,7 +391,7 @@ function logout(webuser) {
 
 
 
-/*
+
 var allWords = JSON.parse(localStorage.getItem('allWords')) || [];
 var gamemodes = JSON.parse(localStorage.getItem('gamemodes')) || [];
 var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
@@ -435,9 +435,9 @@ $(function() {
 		window.location = "playpage.html";
 	}
 	});
-});*/
+});
 
-/*
+
 function resetTimer(time) {
 	window.countdownTime = time;
 	localStorage.setItem('countdownTime', parseInt(countdownTime));
@@ -573,9 +573,9 @@ function vibrateTimeIsRunningOut() {
 	} 
 }
 
-*/
 
-/*var countrycode = localStorage.getItem('countrycode');
+
+var countrycode = localStorage.getItem('countrycode');
 
 var onLocationSuccess = function(position) {
         getCountrycode(position.coords.latitude, position.coords.longitude);
@@ -615,7 +615,7 @@ function getCountrycode(lat, lng) {
 		});
 		
 	});
-}*/
+}
 
 
 function onBackKeyDown() {
@@ -702,3 +702,4 @@ function getPhoto(source) {
     function onFail(message) {
       console.log('Failed because: ' + message);
     }
+*/

@@ -1,7 +1,7 @@
 
-$(window).load(function() {
+/*$(window).load(function() {
     $('#loadscreen').fadeOut('fast');
-});
+});*/
 
 
 $(function() {
@@ -31,9 +31,4 @@ function hideSplashscreen(div) {
 }
 
 
-$(document).on("pagechange", function (e, data) {
-	sessionStorage.setItem("currentPage", data.toPage[0].id);
-	console.log(sessionStorage.getItem("currentPage"));
-});
 
-$.mobile.loading().hide();

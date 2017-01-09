@@ -1,7 +1,7 @@
-var countrycode = sessionStorage.getItem('countrycode');
 
 var onLocationSuccess = function(position) {
         getCountrycode(position.coords.latitude, position.coords.longitude);
+
     };
 
     // onError Callback receives a PositionError object
@@ -11,8 +11,7 @@ function onLocationError(error) {
             'message: ' + error.message + '\n');
     }
 
-	
-var countryIsValid = sessionStorage.getItem('countryIsValid');
+
 	
 function getCountrycode(lat, lng) {
 	grid = codegrid.CodeGrid();
@@ -27,9 +26,11 @@ function getCountrycode(lat, lng) {
 			url: 'http://scoctail.com/location-'+code+'-words.txt',
 			success: function() {
 				sessionStorage.setItem('countryIsValid', "true");
+				console.log("current countrycode: " + sessionStorage.getItem("countrycode")+", valid?:true");
 			},
 			error: function() {
 				sessionStorage.setItem('countryIsValid', "false");
+				console.log("current countrycode: " + sessionStorage.getItem("countrycode")+", valid?:false");
 			}
 
 		});

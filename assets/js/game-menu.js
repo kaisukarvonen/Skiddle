@@ -1,11 +1,11 @@
 
-
-
 $(function() {
 
-	if (sessionStorage.getItem("currentPage") == 'game-menu') {
-		console.log("current countrycode: " +countrycode+", valid:"+countryIsValid);
-	}
+	if($('body').is('.game-menu')) {
+		if (sessionStorage.getItem("countryIsValid") == 'false' || sessionStorage.getItem("countryIsValid") == null) {
+			$("#location-words").prop('disabled', true);
+		}
+	
 		
 		var $element = $("#rangeslider");
 		$element.rangeslider({
@@ -30,22 +30,19 @@ $(function() {
 		$(document).on('input', 'input[type="range"]', function(e) {
             valueOutput(e.target);
         });
+	}
 		
-		if (countryIsValid == 'false') {
-			$("#location-words").prop('disabled', true);
-		}
-		console.log("webuser:"+window.user);
+		//console.log("webuser:"+window.user);
 	
 	
 	
 	
     $("#handle-settings").click(function(e) {
 		gamemodes = [];
-		emptyArray(roundDoneWords, 'roundDoneWords');
-		emptyArray(roundSkippedWords, 'roundSkippedWords');
+		emptyArray('roundDoneWords', JSON.parse(localStorage.getItem('roundDoneWords')));
+		emptyArray('roundSkippedWords', JSON.parse(localStorage.getItem('roundSkippedWords')));
 	
 		var limit = $("#rangeslider").val();
-		localStorage.setItem("timeLimit", parseInt(limit));
 		resetTimer(limit);
 		
 			
@@ -63,17 +60,16 @@ $(function() {
 			$(".modal-title").text("No game mode chosen");
 				$(".modal-title").css("color", "red");
 				$(".modal-body").text("Please choose at least one game mode!");
-				$("#myModal").modal({show: true});
+				$("#gamemenuModal").modal({show: true});
 				e.preventDefault();
 		} else if (gamemodes.length == 1 && gamemodes[0] == 'locationwords') {
 			$(".modal-title").text("Only location word mode chosen");
 				$(".modal-title").css("color", "red");
 				$(".modal-body").text("This location might not have many location specific words, please also choose a second mode for the game!");
-				$("#myModal").modal({show: true});
+				$("#gamemenuModal").modal({show: true});
 				e.preventDefault();
 		} else {
-			localStorage.setItem("gamemodes", JSON.stringify(gamemodes));
-			//location.href = "#playpage"; //miten data-transition tähän?
+			sessionStorage.setItem("gamemodes", JSON.stringify(gamemodes));
 		}
 	});
 
@@ -82,11 +78,11 @@ $(function() {
 
 
 function resetTimer(time) {
-	window.countdownTime = time;
-	localStorage.setItem('countdownTime', parseInt(countdownTime));
+	sessionStorage.setItem('timeLimit', parseInt(limit));
+	sessionStorage.setItem('countdownTime', parseInt(time));
 }
 
-function emptyArray(array, element) {
+function emptyArray(storageName, array) {
 	array = [];
-	localStorage.setItem(element, JSON.stringify(array));
+	localStorage.setItem(storageName, JSON.stringify(array));
 }
