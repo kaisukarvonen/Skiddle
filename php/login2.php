@@ -51,9 +51,8 @@ try {
 		$algorithm = $config->get('jwt')->get('algorithm');
 		
 		$jwt = JWT::encode($data, $secretKey, $algorithm);
-		
-		$unencodedArray = ['jwt' => $jwt];
-		echo json_encode($unencodedArray);
+		//$encodedToken = ['jwt' => $jwt];
+		echo json_encode($jwt);
    } else {
 	   header('HTTP/1.0 401 Unauthorized');
    }

@@ -7,11 +7,13 @@ $(function() {
 
 	$(".word-is-done").click(function() {
 		saveDoneWordtoList(chosenWord);
+		forwardTimer(parseInt(sessionStorage.getItem("countdownTime")), "countdownTime");
 	});
 
 
 	$(".skip-word").click(function() {
 		saveSkippedWordtoList(chosenWord);
+		forwardTimer(parseInt(sessionStorage.getItem("countdownTime")), "countdownTime");	
 	});
 	
 	
@@ -19,6 +21,11 @@ $(function() {
 		emptyArray(allWords, "allWords");
 	}
 });
+
+function forwardTimer(timer, storageName) {
+	timer = timer-1;
+	sessionStorage.setItem(storageName, parseInt(timer));
+}
 
 
 var allWords = JSON.parse(localStorage.getItem('allWords')) || [];

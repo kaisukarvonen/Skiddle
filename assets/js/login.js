@@ -1,10 +1,8 @@
 var user = localStorage.getItem('user');
 
-var store = store || {};
-store.setJWT = function(data) {
-	this.JWT = data;
+function setToken(token) {
+	sessionStorage.setItem("token", token);
 }
-store.setJWT
 
 
 
@@ -30,7 +28,7 @@ $(function() {
 				username1: trimUsername,
 				password1: trimPassword
 				}, function (data) {
-					alert(data);
+					setToken(data);
 					window.location="game-menu.html";
 			}).fail(function(xhr) {
 				if (xhr.status == 401) {

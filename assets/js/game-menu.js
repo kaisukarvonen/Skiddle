@@ -1,10 +1,12 @@
 
+
 $(function() {
 
 	if($('body').is('.game-menu')) {
 		if (sessionStorage.getItem("countryIsValid") == 'false' || sessionStorage.getItem("countryIsValid") == null) {
 			$("#location-words").prop('disabled', true);
 		}
+		
 	
 		
 		var $element = $("#rangeslider");
@@ -43,6 +45,7 @@ $(function() {
 		emptyArray('roundSkippedWords', JSON.parse(localStorage.getItem('roundSkippedWords')));
 	
 		var limit = $("#rangeslider").val();
+		sessionStorage.setItem('timeLimit', parseInt(limit));
 		resetTimer(limit);
 		
 			
@@ -78,7 +81,6 @@ $(function() {
 
 
 function resetTimer(time) {
-	sessionStorage.setItem('timeLimit', parseInt(limit));
 	sessionStorage.setItem('countdownTime', parseInt(time));
 }
 
