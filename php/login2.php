@@ -1,13 +1,19 @@
 <?php
-require_once('.../.../.../.../vendor/autoload.php');
+require_once('/home/scocta5/bin/composer/vendor/autoload.php');
 
-$servername="localhost";
-$dbusername="x";
-$dbpassword="x"; 
-$dbname="x";
+use Zend\Config\Factory;
+use Zend\Http\PhpEnvironment\Request;
+use Firebase\JWT\JWT;
 
 $username=$_POST['username1'];
 $password= sha1($_POST['password1']);
+
+$config = Factory::fromFile('config.php', true);
+
+$servername=$config->get("database")->get("servername");
+$dbusername=$config->get("database")->get("username");
+$dbpassword=$config->get("database")->get("password");
+$dbname=$config->get("database")->get("dbname");
 
 try {
    $connection = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
@@ -17,43 +23,43 @@ try {
    $stmt->bindParam(':username', $username);
    $stmt->bindParam(':password', $password); 
    $stmt->execute();
-   $count=$stmt->rowCount();
+   //$count=$stmt->rowCount();
+   $result = $stmt->fetch();
    
-   if (($count) == 1) {
-     $validCredentials = true;
+   if ($result) {
+	   
+	   
+		$tokenId    = base64_encode(mcrypt_create_iv(32));
+		$issuedAt   = time();
+		$notBefore  = $issuedAt + 10;             //Adding 10 seconds
+		$expire     = $notBefore + 60;            // Adding 60 seconds
+		$serverName = $config->get('serverName');
+		
+		$data = [
+			'iat'  => $issuedAt,         // Issued at: time when the token was generated
+			'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
+			'iss'  => $servername,       // Issuer
+			'nbf'  => $notBefore,        // Not before
+			'exp'  => $expire,           // Expire
+			'data' => [                  // Data related to the signer user
+				'userId'   => $result['id'], // userid from the users table
+				'userName' => $username, // User name
+			]
+		];
+		
+		$secretKey = base64_decode($config->get('jwt')->get('key'));
+		$algorithm = $config->get('jwt')->get('algorithm');
+		
+		$jwt = JWT::encode($data, $secretKey, $algorithm);
+		
+		$unencodedArray = ['jwt' => $jwt];
+		echo json_encode($unencodedArray);
    } else {
-     echo "noMatchError";
+	   header('HTTP/1.0 401 Unauthorized');
    }
-   
-} catch (PDOException $e) {
-   echo "connectionError" . $e->getMessage();
+	
+} catch (Exception $e) {
+		header('HTTP/1.0 500 Internal Server Error');
 }
-
-$config = Factory::fromFile('config.php', true);
-
-
-if ($validCredentials) {
-	
-	$tokenId    = base64_encode(mcrypt_create_iv(32));
-    $issuedAt   = time();
-    $notBefore  = $issuedAt + 10;             //Adding 10 seconds
-    $expire     = $notBefore + 60;            // Adding 60 seconds
-    $serverName = $config->get('serverName');
-	
-	$data = [
-        'iat'  => $issuedAt,         // Issued at: time when the token was generated
-        'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
-        'iss'  => $serverName,       // Issuer
-        'nbf'  => $notBefore,        // Not before
-        'exp'  => $expire,           // Expire
-        'data' => [                  // Data related to the signer user
-            'userId'   => $rs['id'], // userid from the users table
-            'userName' => $username, // User name
-        ]
-    ];
-	
-}
-
-
 
 ?>

@@ -1,5 +1,12 @@
 var user = localStorage.getItem('user');
 
+var store = store || {};
+store.setJWT = function(data) {
+	this.JWT = data;
+}
+store.setJWT
+
+
 
 $(function() {
 	$("#login").click(function() {
@@ -19,26 +26,25 @@ $(function() {
 			$(".modal-body").text("Please enter your password.");
 			$("#myModal").modal({show: true});
 		} else {
-			$.post("http://scoctail.com/login.php", {
+			$.post("http://scoctail.com/login2.php", {
 				username1: trimUsername,
 				password1: trimPassword
 				}, function (data) {
-					if (data == "loginSuccessfull") {
-						localStorage.setItem('user', trimUsername);
-						window.location = "game-menu.html";
-					} else if (data == "noMatchError") {
-						$(".modal-title").text("Login failed");
-						$(".modal-title").css("color", "red");
-						$(".modal-body").text("Username and password do not match!");
-						$("#myModal").modal({show: true});
-					} else {
-						$(".modal-title").text("Login failed");
-						$(".modal-title").css("color", "red");
-						$(".modal-body").text("An error occured during login, please try again later.");
-						$("#myModal").modal({show: true});
-					}
+					alert(data);
+					window.location="game-menu.html";
+			}).fail(function(xhr) {
+				if (xhr.status == 401) {
+					$(".modal-title").text("Login failed");
+					$(".modal-title").css("color", "red");
+					$(".modal-body").text("Username and password do not match!");
+					$("#myModal").modal({show: true});
+				} else if (xhr.status == 500) {
+					$(".modal-title").text("Login failed");
+					$(".modal-title").css("color", "red");
+					$(".modal-body").text("An error occured during login, please try again later.");
+					$("#myModal").modal({show: true});
+				}
 			});
-			
 		}
 		
 	});
