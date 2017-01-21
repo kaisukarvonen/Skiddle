@@ -1,7 +1,7 @@
-var user = localStorage.getItem('user');
 
 function setToken(token) {
-	sessionStorage.setItem("token", token);
+	localStorage.setItem("token", token);
+	console.log(token);
 }
 
 

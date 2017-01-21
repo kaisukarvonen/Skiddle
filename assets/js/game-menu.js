@@ -32,11 +32,14 @@ $(function() {
 		$(document).on('input', 'input[type="range"]', function(e) {
             valueOutput(e.target);
         });
+		
+		if (localStorage.getItem("token") == 'null') {
+		$(".nav-icon-link-profile").css('display', 'none');
+		} else {
+			$(".nav-icon-link-home").css('display', 'none');
+		}
 	}
 		
-		//console.log("webuser:"+window.user);
-	
-	
 	
 	
     $("#handle-settings").click(function(e) {
