@@ -1,8 +1,16 @@
 
-function setToken(token) {
-	localStorage.setItem("token", token);
-	console.log(token);
+function setToken(data) {
+	localStorage.setItem("token", data);
 }
+
+
+function setDecodedToken(data) {
+	var separated = data.split(".");
+    var decoded = b64utos(separated[1]);
+	localStorage.setItem("decodedToken", decoded);
+}
+
+
 
 
 
@@ -24,11 +32,12 @@ $(function() {
 			$(".modal-body").text("Please enter your password.");
 			$("#myModal").modal({show: true});
 		} else {
-			$.post("http://scoctail.com/login2.php", {
+			$.post("assets/login2.php", {
 				username1: trimUsername,
 				password1: trimPassword
 				}, function (data) {
 					setToken(data);
+					setDecodedToken(data);
 					window.location="game-menu.html";
 			}).fail(function(xhr) {
 				if (xhr.status == 401) {

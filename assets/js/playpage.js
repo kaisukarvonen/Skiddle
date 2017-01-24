@@ -34,7 +34,7 @@ var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
 var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
 
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
-	$.post("http://scoctail.com/addwords.php", {
+	$.post("assets/addwords.php", {
 			doneWords: arrayDone.length,
 			skippedWords: arraySkipped.length,
 			username1: window.user
@@ -92,11 +92,11 @@ function setRandomWord() {
 	}
 	
 	if (randomMode == "explain") {
-		return wordFromFile("http://scoctail.com/english-explain-words.txt").then(appendWord);
+		return wordFromFile("assets/english-explain-words.txt").then(appendWord);
 	} else if (randomMode == "mime") {
-		return wordFromFile("http://scoctail.com/english-mime-words.txt").then(appendWord);
+		return wordFromFile("assets/english-mime-words.txt").then(appendWord);
 	} else if (randomMode == "locationwords") {
-		return wordFromFile("http://scoctail.com/location-"+countrycode+"-words.txt").then(appendWord);
+		return wordFromFile("assets/location-"+countrycode+"-words.txt").then(appendWord);
 	}
 }
 

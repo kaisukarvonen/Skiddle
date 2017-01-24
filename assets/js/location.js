@@ -23,7 +23,7 @@ function getCountrycode(lat, lng) {
 		
 		$.ajax({
 			type: 'HEAD',
-			url: 'http://scoctail.com/location-'+code+'-words.txt',
+			url: 'assets/location-'+code+'-words.txt',
 			success: function() {
 				sessionStorage.setItem('countryIsValid', "true");
 				console.log("current countrycode: " + sessionStorage.getItem("countrycode")+", valid?:true");

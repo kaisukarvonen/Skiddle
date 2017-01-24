@@ -18,6 +18,10 @@ body.inverse .card .form-control {
   color: initial;
 }
 
+#profile {
+	display:inline;
+}
+
 .footer {
   margin:2px 0 4px 0;
 }
@@ -55,7 +59,7 @@ body.inverse .card .form-control {
     width: 100%;
     z-index: 99;
 	position:absolute;
-	background-image:url("C:/Users/Kaisu/git/propsis/Mobile-wordgame/Mobile-wordgame/assets/img/splashscreen.jpg");
+	background-image:url("http://scoctail.com/app/assets/img/splashscreen.jpg");
 	background-size: cover;
 	background-position: top center;
 }
@@ -65,7 +69,7 @@ body.inverse .card .form-control {
     width: 100%;
     z-index: 99;
 	position:absolute;
-	background-image:url("C:/Users/Kaisu/git/propsis/Mobile-wordgame/Mobile-wordgame/assets/img/loadscreen.gif");
+	background-image:url("http://scoctail.com/app/assets/img/loadscreen.gif");
 	background-size: cover;
 	background-position: top center;
 }

@@ -1,13 +1,23 @@
+
+var userName = function getUsername(token) {
+	var decodedToken = localStorage.getItem("decodedToken");
+	console.log(decodedToken);
+	var tokenJson = JSON.parse(decodedToken);
+	console.log(tokenJson.data.userName);
+	return tokenJson.data.userName;
+}
+
+
 $(function() {
 	if($('body').is('.profile')) {
-		showProfilePicture(window.user);
+		showProfilePicture(userName);
 	}
 });
 
 
 function showProfilePicture(webuser) {
-	$("#profile-picture").attr("src", "http://scoctail.com/images/profile-pic-"+webuser+".jpg");
-	$(".header-title").text(webuser);
+	$("#profile-picture").attr("src", "app/profileimages/profile-pic-"+userName+".jpg");
+	$(".header-title").text(userName);
 }
 
 
@@ -58,7 +68,7 @@ function uploadPhoto(imageURI) {
 	 options.chunkedMode = false;
 
 	var ft = new FileTransfer();
-	 ft.upload(imageURI, "http://scoctail.com/upload.php", function(result){
+	 ft.upload(imageURI, "assets/upload.php", function(result){
 	 console.log(JSON.stringify(result));
 	 window.location.reload();
 	 }, function(error){

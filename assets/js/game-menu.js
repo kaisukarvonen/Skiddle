@@ -38,6 +38,7 @@ $(function() {
 		} else {
 			$(".nav-icon-link-home").css('display', 'none');
 		}
+		
 	}
 		
 	

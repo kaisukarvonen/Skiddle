@@ -1,24 +1,25 @@
 
 
-
-	$(".nav-icon-link-profile").click(function(e) {
+$(function() {
+	$("#profile a").click(function(e) {
 		e.preventDefault();
 		$.ajax({
-			url: 'http://scoctail.com/showprofile.php',
-			beforeSend: function(request) {
-				request.setRequestHeader('Authorization', 'Bearer '+localStorage.getItem("token");
-			},
 			type: 'GET',
+			url: 'assets/showprofile.php',
+			beforeSend: function(request) {
+				request.setRequestHeader('Authorization', 'Bearer '+localStorage.getItem("token"));
+			},
 			success: function(data) {
-				window.location="profile.html";
-				//take to profile.html, show profile picture
+				//window.location="profile.html";
+				alert("successfull");
 			},
 			error: function() {
-				alert("Error occured") //modal here
+				alert("Error occured"); //modal here
 			}
 			
 		});
 	});
+});
 	
 	
 
