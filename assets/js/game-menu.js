@@ -7,6 +7,8 @@ $(function() {
 			$("#location-words").prop('disabled', true);
 		}
 		
+		console.log(localStorage.getItem("token"));
+		
 	
 		
 		var $element = $("#rangeslider");
