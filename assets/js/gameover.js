@@ -6,7 +6,7 @@ $(function() {
 		listWordsOnPage(JSON.parse(localStorage.getItem('roundSkippedWords')), '#list-skipped-words', '#skipped-words');
 		footerPosition(".footer-bottom", roundDoneWords, roundSkippedWords);
 		console.log(roundDoneWords + " -- "+ roundSkippedWords);
-		/*if (window.user != 'null') {
+		/*if (localStorage.getItem("token") != 'null') {
 			//addRoundWordstoDatabase(roundDoneWords, roundSkippedWords);
 		}*/
 	}
@@ -22,13 +22,38 @@ $(function() {
 
 
 
+function addRoundWordstoDatabase(arrayDone, arraySkipped) {
+	
+	for (int i=0; i<arrayDone.length; i++) {
+		if (arrayDone[i].mode = "explain") {
+			
+		} else if (arrayDone[i].mode = "mime") {
+			
+		} else {
+			
+		}
+	}
+	$.post("assets/addwords.php", {
+			explainedWords: ,
+			mimickedWords: ,
+			
+			skippedWords: arraySkipped.length,
+			username1: userName
+			}, function (data) {
+				console.log(data);
+			}//beforeSend: add header
+	);
+}
+
+
+
 
 function listWordsOnPage(array, element, title) {
 	if (array.length == 0) {
 		$(title).css("display", "none");
 	} else {
 		for (var i=0; i < array.length; i++) {
-			$(element).append("<li><span>"+array[i]+"</span></li>");
+			$(element).append("<li><span>"+array[i].name+"</span></li>");
 		}
 	}
 }

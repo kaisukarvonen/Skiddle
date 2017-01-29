@@ -33,17 +33,6 @@ var gamemodes = JSON.parse(sessionStorage.getItem('gamemodes')) || [];
 var roundDoneWords = JSON.parse(localStorage.getItem('roundDoneWords')) || [];
 var roundSkippedWords = JSON.parse(localStorage.getItem('roundSkippedWords')) || [];
 
-function addRoundWordstoDatabase(arrayDone, arraySkipped) {
-	$.post("assets/addwords.php", {
-			doneWords: arrayDone.length,
-			skippedWords: arraySkipped.length,
-			username1: window.user
-			}, function (data) {
-				console.log(data);
-			}
-	);
-}
-
 
 function wordFromFile(fileName) {
 	return $.get(fileName).then(function(data) {
@@ -56,8 +45,9 @@ function wordFromFile(fileName) {
 			randomIndex = Math.floor(Math.random() * (lines.length-1));
 			word = lines[randomIndex];
 		}
-		chosenWord = word;
-		return chosenWord;
+		chosenWord.name = word;
+		chosenWord.mode = randomMode;
+		return chosenWord.name;
 	});
 }
 
@@ -77,10 +67,11 @@ function wordIsUsed(word) {
 	return false;
 }
 
-var chosenWord;
+var chosenWord = {};
+var randomMode;
 
 function setRandomWord() {
-	var randomMode = gamemodes[Math.floor(Math.random() * gamemodes.length)];
+	randomMode = gamemodes[Math.floor(Math.random() * gamemodes.length)];
 	console.log("random: "+randomMode+", modes:" +gamemodes);
 	console.log("allWords:" +JSON.parse(localStorage.getItem('allWords')));
 	var countrycode = sessionStorage.getItem("countrycode");
@@ -101,9 +92,9 @@ function setRandomWord() {
 }
 
 
-function appendWord(chosenWord) {
-	$('.current-word').text(chosenWord);
-	saveWordToAllWordsList(chosenWord);
+function appendWord(chosenWord.name) {
+	$('.current-word').text(chosenWord.name);
+	saveWordToAllWordsList(chosenWord.name);
 }
 
 

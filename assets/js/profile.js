@@ -12,6 +12,7 @@ $(function() {
 			success: function(data) {
 				//window.location="profile.html";
 				alert("successfull");
+				
 			},
 			error: function(data) {
 				alert("Error occured");
@@ -20,7 +21,7 @@ $(function() {
 		});
 	});
 });
-	//GET assets/showprofile.php 400 Bad Request????
+	//Authorization header is string(0) ""????
 	
 
 
