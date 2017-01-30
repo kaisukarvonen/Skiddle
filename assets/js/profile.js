@@ -1,14 +1,18 @@
-
+var token = localStorage.getItem("token");
 
 $(function() {
 	$("#profile a").click(function(e) {
+		console.log(token);
 		e.preventDefault();
 		$.ajax({
+			type: 'POST',
 			url: 'assets/showprofile.php',
-			beforeSend: function(request) {
-				request.setRequestHeader('Authorization', 'Bearer '+localStorage.getItem("token"));
-			},
-			type: 'GET',
+			data: {jwt: '1234'},
+			dataType: 'json',
+			/*beforeSend: function(request) {
+				request.setRequestHeader('Authorization', 'Bearer '+ token);
+			},*/
+			contentType: "application/json; charset=utf-8",
 			success: function(data) {
 				//window.location="profile.html";
 				alert("successfull");
@@ -21,7 +25,7 @@ $(function() {
 		});
 	});
 });
-	//Authorization header is string(0) ""????
+	//Authorization header is string(0) "" on server????
 	
 
 
