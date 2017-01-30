@@ -1,10 +1,7 @@
 
 function setToken(data) {
-	var length = data.length;
+	localStorage.setItem("token", data);
 	alert(data);
-	var actualToken = data.substring(1,length-1);
-	
-	localStorage.setItem("token", actualToken);
 }
 
 

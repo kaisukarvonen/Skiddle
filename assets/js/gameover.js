@@ -23,20 +23,21 @@ $(function() {
 
 
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
-	
+	var explained, mimicked, location;
+	explained = mimicked = location = 0;
 	for (int i=0; i<arrayDone.length; i++) {
 		if (arrayDone[i].mode = "explain") {
-			
+			explained++;
 		} else if (arrayDone[i].mode = "mime") {
-			
+			mimicked++;
 		} else {
-			
+			location++;
 		}
 	}
 	$.post("assets/addwords.php", {
-			explainedWords: ,
-			mimickedWords: ,
-			
+			explainedWords: explained,
+			mimickedWords: mimicked,
+			locationWords: location,
 			skippedWords: arraySkipped.length,
 			username1: userName
 			}, function (data) {

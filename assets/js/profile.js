@@ -1,6 +1,6 @@
 var token = localStorage.getItem("token");
 
-$(function() {
+/*$(function() {
 	$("#profile a").click(function(e) {
 		console.log(token);
 		e.preventDefault();
@@ -8,11 +8,9 @@ $(function() {
 			type: 'POST',
 			url: 'assets/showprofile.php',
 			data: {jwt: '1234'},
-			dataType: 'json',
 			/*beforeSend: function(request) {
 				request.setRequestHeader('Authorization', 'Bearer '+ token);
-			},*/
-			contentType: "application/json; charset=utf-8",
+			},
 			success: function(data) {
 				//window.location="profile.html";
 				alert("successfull");
@@ -24,9 +22,24 @@ $(function() {
 			
 		});
 	});
-});
+});*/
 	//Authorization header is string(0) "" on server????
 	
+	
+$(function() {
+	$("#profile").click(function(event) {
+		event.preventDefault();
+		$.post("assets/showprofile.php", {
+			authToken: token
+		}, function(data) {
+			alert("successfull");
+			console.log(data);
+			//window.location="profile.html";
+		}).fail(function(data) {
+			alert("error");
+		})
+	})
+});
 
 
 	
