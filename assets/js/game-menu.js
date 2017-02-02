@@ -35,7 +35,7 @@ $(function() {
             valueOutput(e.target);
         });
 		
-		if (localStorage.getItem("token") == 'null') {
+		if (localStorage.getItem("token") === null) {
 		$(".nav-icon-link-profile").css('display', 'none');
 		} else {
 			$(".nav-icon-link-home").css('display', 'none');

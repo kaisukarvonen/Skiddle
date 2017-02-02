@@ -58,7 +58,7 @@ function wordIsUsed(word) {
 	if (allWords.length == 0) {
 		return false;
 	} else {
-		for (i=0; i < allWords.length; i++) {
+		for (var i=0; i < allWords.length; i++) {
 			if (word == allWords[i]) {
 				return true;
 			}
@@ -67,7 +67,7 @@ function wordIsUsed(word) {
 	return false;
 }
 
-var chosenWord = {};
+var chosenWord = {name: "", mode:""};
 var randomMode;
 
 function setRandomWord() {
@@ -92,9 +92,9 @@ function setRandomWord() {
 }
 
 
-function appendWord(chosenWord.name) {
-	$('.current-word').text(chosenWord.name);
-	saveWordToAllWordsList(chosenWord.name);
+function appendWord(name) {
+	$('.current-word').text(name);
+	saveWordToAllWordsList(name);
 }
 
 

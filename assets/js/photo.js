@@ -3,7 +3,6 @@ var userName = function getUsername(token) {
 	var decodedToken = localStorage.getItem("decodedToken");
 	console.log(decodedToken);
 	var tokenJson = JSON.parse(decodedToken);
-	console.log(tokenJson.data.userName);
 	return tokenJson.data.userName;
 }
 
@@ -16,8 +15,8 @@ $(function() {
 
 
 function showProfilePicture(webuser) {
-	$("#profile-picture").attr("src", "app/profileimages/profile-pic-"+userName+".jpg");
-	$(".header-title").text(userName);
+	$("#profile-picture").attr("src", "profileimages/profile-pic-"+webuser+".jpg");
+	$(".header-title").text(webuser);
 }
 
 
