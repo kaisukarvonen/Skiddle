@@ -13,7 +13,7 @@ $(function() {
 			$(".nav-icon-link-home").css('display', 'none');
 		}
 		if (localStorage.getItem("token") !== null && userName !==null) {
-			addRoundWordstoDatabase(localStorage.getItem('roundDoneWords'), localStorage.getItem('roundSkippedWords'));
+			addRoundWordstoDatabase(JSON.parse(localStorage.getItem('roundDoneWords')), JSON.parse(localStorage.getItem('roundSkippedWords')));
 		}
 	}
 	
@@ -36,6 +36,7 @@ var userName = function getUsername(token) {
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 	var explained, mimicked, location;
 	explained = mimicked = location = 0;
+	console.log(arrayDone);
 	for (var i=0; i<arrayDone.length; i++) {
 		if (arrayDone[i].mode = "explain") {
 			explained++;
@@ -45,7 +46,8 @@ function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 			location++;
 		}
 	}
-	$.post("assets/addwords.php", {
+	alert("e:"+explained+", m:"+mimicked);
+	/*$.post("assets/addwords.php", {
 		explainedWords: explained,
 		mimickedWords: mimicked,
 		locationWords: location,
@@ -55,7 +57,7 @@ function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 		console.log("user's round words added to database");
 	}).fail(function(data) {
 		alert("Error adding user's round words to database");
-	});
+	});*/
 }
 
 
