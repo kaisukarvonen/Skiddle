@@ -18,7 +18,7 @@ $dbname=$config->get("database")->get("dbname");
 $explained= $_POST['explainedWords'];
 $mimicked= $_POST['mimickedWords'];
 $location= $_POST['locationWords'];
-$skipped = $_POST['skippedwords'];
+$skipped = $_POST['skippedWords'];
 $username = $_POST['username1'];
 
 try {

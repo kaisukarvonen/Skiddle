@@ -36,28 +36,28 @@ var userName = function getUsername(token) {
 function addRoundWordstoDatabase(arrayDone, arraySkipped) {
 	var explained, mimicked, location;
 	explained = mimicked = location = 0;
-	console.log(arrayDone);
 	for (var i=0; i<arrayDone.length; i++) {
-		if (arrayDone[i].mode = "explain") {
+		if (arrayDone[i].mode == "explain") {
 			explained++;
-		} else if (arrayDone[i].mode = "mime") {
+		} else if (arrayDone[i].mode == "mime") {
 			mimicked++;
 		} else {
 			location++;
 		}
 	}
-	alert("e:"+explained+", m:"+mimicked);
-	/*$.post("assets/addwords.php", {
+	var skipped = arraySkipped.length;
+	console.log("e:"+explained+", m:"+mimicked);
+	$.post("assets/addwords.php", {
 		explainedWords: explained,
 		mimickedWords: mimicked,
 		locationWords: location,
-		skippedWords: arraySkipped.length,
+		skippedWords: skipped,
 		username1: userName
 	}, function (data) {
 		console.log("user's round words added to database");
 	}).fail(function(data) {
 		alert("Error adding user's round words to database");
-	});*/
+	});
 }
 
 
