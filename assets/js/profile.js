@@ -28,7 +28,7 @@ var token = localStorage.getItem("token");
 	
 $(function() {
 	$("#profile").click(function(event) {
-		event.preventDefault();
+		/*event.preventDefault();
 		$.post("assets/showprofile.php", {
 			authToken: token
 		}, function(data) {
@@ -37,7 +37,8 @@ $(function() {
 			//window.location="profile.html";
 		}).fail(function(data) {
 			alert("error");
-		})
+		})*/
+		window.location="profile.html";
 	})
 });
 

@@ -1,10 +1,12 @@
 
-var userName = function getUsername(token) {
+function getUsername() {
 	var decodedToken = localStorage.getItem("decodedToken");
 	console.log(decodedToken);
 	var tokenJson = JSON.parse(decodedToken);
 	return tokenJson.data.userName;
 }
+
+var userName = getUsername();
 
 
 $(function() {
@@ -15,7 +17,9 @@ $(function() {
 
 
 function showProfilePicture(webuser) {
-	$("#profile-picture").attr("src", "profileimages/profile-pic-"+webuser+".jpg");
+	var user = webuser;
+	console.log(user);
+	$("#profile-picture").attr("src", "profileimages/profile-pic-"+user+".jpg");
 	$(".header-title").text(webuser);
 }
 
@@ -29,6 +33,7 @@ $(function() {
     $("#change-picture").click(function() {
 		capturePhoto();
 	});
+});
 
 
 
@@ -84,6 +89,6 @@ function getPhoto(source) {
 }
 
 
-    function onFail(message) {
-      console.log('Failed because: ' + message);
-    }
+function onFail(message) {
+    console.log('Failed because: ' + message);
+}

@@ -8,18 +8,17 @@ use Firebase\JWT\JWT;
 
 	//echo '<pre>'; print_r(apache_request_headers()); echo '</pre>';
 	
-	//$jwt=$_POST['authToken'];
-	$jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE0ODgxNDg1MzYsImp0aSI6IitCTjVSNzVOeExQdVZVQUY0T2VvSzFVVEJlUEF6MFwvYk9NYnZtaFVFMnBBPSIsImlzcyI6ImxvY2FsaG9zdCIsIm5iZiI6MTQ4ODE0ODU0NiwiZXhwIjoxNDg4MTQ4OTQ2LCJkYXRhIjp7InVzZXJJZCI6IjYiLCJ1c2VyTmFtZSI6ImtheXR0YWphIn19.BgDkoNPF8tdn6s9KlTp4l2Pw-8_SA30dTKFu9pmjF9SoWC9lZkdVaT_-7jUiiBKBwTh-0XpOzlOH3Lq4UVKoUA";
+	$jwt=$_POST['authToken'];
+	
 	$config = Factory::fromFile('config.php', true);
 	
 	if (isset($jwt)) {
-		/*try {
-				
-				header('Content-type: application/json');
-				
-				/*$secretKey = base64_decode($config->get('jwt')->get('key'));
+		try {
+				$secretKey = base64_decode($config->get('jwt')->get('key'));
 				$algorithm = $config->get('jwt')->get('algorithm');
-                /*$decoded = JWT::decode($jwt, $secretKey, $algorithm); //ei onnistu??
+				
+				//decoding doesn't work??
+                $decoded = JWT::decode($jwt, $secretKey, $algorithm);
 				echo json_encode($decoded);
 				
 		} catch (Exception $e) {
@@ -27,7 +26,7 @@ use Firebase\JWT\JWT;
 				
         }
 	} else {
-		header('HTTP/1.0 400 Bad Request - Token not found');*/
+		header('HTTP/1.0 400 Bad Request - Token not found');
 	}
 	
 	

@@ -164,6 +164,14 @@ a.nav-icon-link-info, a.nav-icon-link-info:active {
 	border-radius:100px;
 }
 
+#canvas-holder {
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 
 .profile-photo {
 	text-align:center;
